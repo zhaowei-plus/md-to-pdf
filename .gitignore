@@ -1,0 +1,11 @@
+.vscode
+node_modules
+
+# generated
+/dist/*
+
+# tests
+/.nyc_output
+/coverage
+/src/test/**/*.pdf
+/src/test/**/*.html
