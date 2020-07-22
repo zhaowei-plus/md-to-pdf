@@ -6,5 +6,11 @@
 xnpm i @xm/md2pdf -S
 ```
 
-其它请参考[md-to-pdf](https://github.com/simonhaenisch/md-to-pdf)
+发布新版本
+
+```
+xnpm publish
+```
+
+其它请参考 [md-to-pdf](https://github.com/simonhaenisch/md-to-pdf)
 
