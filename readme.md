@@ -3,13 +3,13 @@
 安装
 
 ```
-xnpm i @xm/md2pdf -S
+export PUPPETEER_DOWNLOAD_HOST=https://storage.googleapis.com.cnpmjs.org && npm i xm-md2pdf -S
 ```
 
 发布新版本
 
 ```
-xnpm publish
+npm publish
 ```
 
 其它请参考 [md-to-pdf](https://github.com/simonhaenisch/md-to-pdf)
