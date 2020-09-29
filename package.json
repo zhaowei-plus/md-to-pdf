@@ -1,6 +1,6 @@
 {
-  "name": "xm-md2pdf",
-  "version": "0.0.3",
+  "name": "xm-md-pdf",
+  "version": "0.0.4",
   "description": "CLI tool for converting Markdown files to PDF.",
   "keywords": [
     "markdown-to-pdf",
@@ -51,8 +51,9 @@
     "iconv-lite": "0.6.2",
     "listr": "0.14.3",
     "marked": "1.1.1",
-    "semver": "7.3.2",
+    "officegen": "^0.6.4",
     "puppeteer": "5.2.1",
+    "semver": "7.3.2",
     "serve-handler": "6.1.3"
   },
   "devDependencies": {

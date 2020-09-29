@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import { LaunchOptions, PDFOptions } from 'puppeteer';
 
 export const defaultConfig: Config = {
+	mode: '', // 模式
 	basedir: process.cwd(),
 	stylesheet: [resolve(__dirname, '..', '..', 'markdown.css')],
 	css: '',
@@ -30,6 +31,7 @@ export const defaultConfig: Config = {
  * In config keys, dashes of cli flag names are replaced with underscores.
  */
 export interface Config {
+	mode: string, // 'singleton', // 单例模式：批量转换性能优化, normal 普通模式
 	/**
 	 * Base directory to be served by the file server.
 	 */

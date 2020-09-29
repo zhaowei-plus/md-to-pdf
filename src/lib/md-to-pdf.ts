@@ -18,11 +18,7 @@ export const convertMdToPdf = async (
 	config: Config,
 	args: cliArgs = {} as cliArgs,
 ) => {
-	const mdFileContent =
-		'content' in input
-			? input.content
-			: await readFile(input.path, args['--md-file-encoding'] ?? config.md_file_encoding);
-
+	const mdFileContent = 'content' in input ? input.content : await readFile(input.path, args['--md-file-encoding'] ?? config.md_file_encoding);
 	const { content: md, data: frontMatterConfig } = grayMatter(mdFileContent);
 
 	// merge front-matter config
@@ -78,6 +74,7 @@ export const convertMdToPdf = async (
 	const relativePath = 'path' in input ? resolve(input.path).replace(config.basedir, '') : '/';
 
 	const output = await generateOutput(html, relativePath, config);
+	console.log('generateOutput complete:', relativePath);
 
 	if (!output) {
 		if (config.devtools) {
