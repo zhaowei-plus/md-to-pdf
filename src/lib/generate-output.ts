@@ -5,9 +5,8 @@ import { isHttpUrl } from './is-http-url';
 import { Global } from './global'
 
 export const createBrowser = async (config: Config) => {
-	console.log('create browser ')
-	return await puppeteer.launch({ devtools: config.devtools, ...config.launch_options });
-
+	console.log('create browser:', config)
+	// return await puppeteer.launch({ ...config.launch_options });
 }
 
 export const closeBrowser = async () => {
@@ -33,7 +32,7 @@ export const generateOutput = async (
 
 	if (mode === 'singleton') {
 		if (!Global.browser?.isConnected?.()) {
-			Global.browser = await createBrowser(config)
+			// Global.browser = await createBrowser(config)
 		}
 	} else {
 		Global.browser = await puppeteer.launch({ devtools: config.devtools, ...config.launch_options });

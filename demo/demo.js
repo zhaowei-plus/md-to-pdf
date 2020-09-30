@@ -12,6 +12,8 @@ const launch_options = {
 		// "--no-sandbox",
 		// "--no-zygote",
 		// "--single-process"
+
+
 	],
 	executablePath:
 		"/Users/zhaowei/.chromium-browser-snapshots/mac-800071/chrome-mac/Chromium.app/Contents/MacOS/Chromium"
@@ -19,23 +21,53 @@ const launch_options = {
 
 const contentArray = [
 	"# 测试标题",
-	// "# 测试标题",
-	// "# 测试标题",
-	// "# 测试标题",
+	"# 测试标题",
+	"# 测试标题",
+	"# 测试标题",
 ];
 
 (async () => {
-	console.time('doc-demo')
+	console.time('demo')
+
+	Mark.setConfig({
+		launch_options,
+	})
+
+	await Mark.toHtml("# 测试标题", 'html/index.html')
+	await Mark.batchToHtml([
+		{
+			content: "# 测试标题",
+			dist: 'htmls/index/html'
+		}
+	])
+
+	await Mark.toPdf("# 测试标题", 'pdf/index.pdf')
+	await Mark.batchToPdf([
+		{
+			content: "# 测试标题",
+			dist: 'htmls/index.pdf'
+		}
+	])
+
+	await Mark.toDoc("# 测试标题", 'html/index.doc')
+	await Mark.batchToDoc([
+		{
+			content: "# 测试标题",
+			dist: 'htmls/index.do'
+		}
+	])
+
+
 	const promiseArray = contentArray.map(async content => {
 		console.log('start mdToPdf')
 		return await mdToPdf(
 			{ content: "# 测试标题" },
 			{
 				mode: 'singleton',
-				dest: `doc${Math.random()}.doc`,
+				dest: `demo/demo${Math.random()}.pdf`,
 				launch_options
 			},
-			'doc'
+			'pdf'
 		).catch(console.error);
 	});
 
@@ -45,6 +77,8 @@ const contentArray = [
 			Promise.resolve()
 		);
 	};
+	await createBrowser()
 	await serialPromises(promiseArray);
-	console.timeEnd('doc-demo')
+	await closeBrowser();
+	console.timeEnd('demo')
 })();

@@ -1,9 +1,7 @@
 import { Config } from './config';
 import { getMarked } from './get-marked-with-highlighter';
 
-/**
- * Generates a HTML document from a markdown string and returns it as a string.
- */
+// HTML 模板
 export const getHtml = (md: string, config: Config) => `
 	<!DOCTYPE html>
 		<html>

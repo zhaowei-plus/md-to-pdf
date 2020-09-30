@@ -25,37 +25,6 @@ const contentArray = [
 ];
 
 (async () => {
-	console.time('demo')
-
-	Mark.setConfig({
-		launch_options,
-	})
-
-	await Mark.toHtml("# 测试标题", 'html/index.html')
-	await Mark.batchToHtml([
-		{
-			content: "# 测试标题",
-			dist: 'htmls/index/html'
-		}
-	])
-
-	await Mark.toPdf("# 测试标题", 'pdf/index.pdf')
-	await Mark.batchToPdf([
-		{
-			content: "# 测试标题",
-			dist: 'htmls/index.pdf'
-		}
-	])
-
-	await Mark.toDoc("# 测试标题", 'html/index.doc')
-	await Mark.batchToDoc([
-		{
-			content: "# 测试标题",
-			dist: 'htmls/index.do'
-		}
-	])
-
-
 	const promiseArray = contentArray.map(async content => {
 		console.log('start mdToPdf')
 		return await mdToPdf(

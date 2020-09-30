@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { Config } from './config'
+// import { Config } from './config'
 
 // 全局对象
 export module Global {
@@ -7,5 +7,5 @@ export module Global {
 	export let browser: puppeteer.Browser;
 
 	// 全局 config 对象
-	export let config: Config;
+	// export let config: Config;
 }
