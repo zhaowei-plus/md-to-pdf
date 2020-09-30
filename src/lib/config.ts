@@ -2,14 +2,23 @@ import { MarkedOptions } from 'marked';
 import { resolve } from 'path';
 import { LaunchOptions, PDFOptions } from 'puppeteer';
 
+// TODO 默认配置
 export const defaultConfig: Config = {
 	mode: '', // 模式
 	basedir: process.cwd(),
-	stylesheet: [resolve(__dirname, '..', '..', 'markdown.css')],
+	stylesheet: [
+		resolve(__dirname, '..', '..', 'markdown.css')
+	],
 	css: '',
 	body_class: [],
 	highlight_style: 'github',
-	marked_options: {},
+
+	// markdown 转 html 的配置参数
+	marked_options: {
+
+	},
+
+	// html 转 pdf的配置参数
 	pdf_options: {
 		printBackground: true,
 		format: 'A4',
@@ -20,9 +29,15 @@ export const defaultConfig: Config = {
 			left: '20mm',
 		},
 	},
+	// puppeteer 启动浏览器的参数
 	launch_options: {},
+
+	// md 转 html 的编码
 	md_file_encoding: 'utf-8',
+
+	// style 文件编码
 	stylesheet_encoding: 'utf-8',
+
 	as_html: false,
 	devtools: false,
 };
@@ -107,7 +122,12 @@ export interface Config {
 	devtools: boolean;
 
 	/**
-	 * Port to run the local server on.
+	 * Port to run the local server on. 本地服务端口
 	 */
 	port?: number;
+}
+
+
+export interface IConfig extends Config {
+
 }

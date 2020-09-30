@@ -19,14 +19,19 @@ export const mdToPdf = async (
 	config: Partial<Config> = {},
 	type: 'pdf' | 'doc'
 ) => {
-
+	// 基本参数校验
 	console.log('mdToPdf:', input, config, type)
+
+	// TODO 第一版只支持内容导出html，不支持文件导出html
 
 	if (!('path' in input ? input.path : input.content)) {
 		throw new Error('Specify either content or path.');
 	}
 
+
+
 	if (!config.port) {
+		// 获取可用的端口号
 		config.port = await getPort();
 	}
 
@@ -48,6 +53,7 @@ export const mdToPdf = async (
 
 	if (type === 'pdf') {
 		console.log('convertMdToPdf')
+		// TODO 为啥要创建一个服务器
 		const server = await serveDirectory(mergedConfig);
 		const pdf = await convertMdToPdf(input, mergedConfig);
 		server.close();
@@ -56,6 +62,18 @@ export const mdToPdf = async (
 		await convertMdToDoc(input, mergedConfig)
 	}
 };
+
+/**
+ * 公共步骤：
+ * 1、参数校验
+ * 2、创建服务器
+ * 3、解析markdown文件为html（目前仅支持全量导出，可以导出string、也可以导出文件）
+ * 		需要支持单个解析和批量解析
+ * 4、pdf导出：
+ * 		1）启动 puppeteer 创建一个 chrome 实例，实例话一个 page仅生成一个tab页，按顺序加载html并导出pdf
+ * 		2）启动 puppeteer 创建一个 chrome 实例，实例话一个 page仅生成一个tab页，按顺序加载html并导出pdf
+ * */
+
 //
 // export const setConfig = async (config: Partial<Config> = {}) => {
 // 	if (!config.port) {

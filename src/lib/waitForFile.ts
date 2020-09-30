@@ -1,5 +1,8 @@
 import fs from "fs";
 
+// TODO 现在会有问题
+// pupperteer 模拟文件下载时，见听不到文件下载成功，只能通过轮询检测指定目录下的文件是否存在，如果文件存在则下载成功，
+// 问题：如果下载的时比较大的文件，是否存在文件未下载完毕就关闭浏览器的情况呢
 export const waitForFile = (fileName: any) => {
 	return new Promise(function(resolve, reject){
 		// 定时轮询查看文件是否已存在
