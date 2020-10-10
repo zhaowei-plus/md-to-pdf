@@ -1,0 +1,566 @@
+<html lang="zh-cn" class="font-normalize f14">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<!--[if IE]>
+	<![endif]-->
+	<title>JS 基础系列之字符串</title>
+	<link rel="stylesheet" href="./ant/index.css">
+	<link rel="stylesheet" href="./lib/editormd.css">
+	<meta name="msapplication-TileColor" content="#000000">
+	<style type="text/css">.aside { float: left; width: 220px; height: calc(100vh - 56px); border-right: 1px #CBCFD6 solid; overflow: auto; padding-bottom: 50px; } .center { margin-left: 220px; height: calc(100vh - 56px); overflow: auto; } .center__content { width: 880px; margin: 0 auto; } .markdown-body ul { list-style: disc; } .markdown-body ol ol .markdown-body ul ol { list-style-type: lower-roman; } .markdown-body ol ol .markdown-body ul ol ul { list-style: square; } .markdown-body ol ol .markdown-body ul ol ol { list-style: lower-alpha; } .markdown-body ul ul ol, .markdown-body ol ul ol { list-style: lower-alpha; } .markdown-body ol { list-style: decimal; } .pop__menu--item { min-width: 80px; padding: 5px 10px; cursor: pointer; } .pop__menu--item:hover { background: #f7f8f9; }</style>
+	<style type="text/css">.header { position: relative; height: 56px; background: #fff; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); z-index: 1; } .header .ant-input { border-radius: 16px; } .header .focus-large { width: 300px; }</style>
+	<style type="text/css"></style>
+	<style type="text/css">.prompt__modal { position: fixed; z-index: 100000; width: 100%; top: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center; background-color: rgba(0, 0, 0, 0.5); } .prompt__content { width: 450px; border-radius: 4px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); pointer-events: auto; padding: 0 0 24px; background-color: #fff; } .prompt__title { line-height: 55px; font-size: 16px; padding: 0 15px; border-bottom: 1px solid #e8e8e8; } .prompt__footer { border-top: 1px solid #e8e8e8; } .doc-zoom-enter > div { transform: scale(0.3); } .doc-zoom-enter-active { transition: transform 0.3s; } .doc-zoom-enter-active > div { transition: transform 0.3s; }</style>
+	<style type="text/css">.aside { position: relative; } .aside__menu--item { position: relative; display: flex; align-items: center; height: 44px; padding-left: 40px; cursor: pointer; } .aside__menu--item:before { display: none; content: ''; position: absolute; left: 0; width: 4px; height: 100%; background: #1B90FF; } .aside__menu--item:hover, .aside__menu--item.active { background: #EDF4FD; } .aside__menu--item:hover:before, .aside__menu--item.active:before { display: block; } .aside__copy { border-top: 1px #CBCFD6 solid; position: absolute; bottom: 30px; left: 20px; right: 20px; padding-top: 30px; text-align: center; } .center__content .project-item { position: relative; width: 280px; height: 160px; background: #ffffff; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.04); border-radius: 2px; margin-top: 20px; text-align: center; padding: 30px 20px 0 20px; } .center__content .project-item:not(:nth-of-type(3n)) { margin-right: 20px; } .center__content .project-item__setting { position: absolute; cursor: pointer; top: 10px; right: 10px; }</style>
+	<style type="text/css">html{box-sizing:border-box;-ms-overflow-style:scrollbar;-webkit-tap-highlight-color:rgba(0,0,0,0)}*,*::before,*::after{box-sizing:inherit}body{-webkit-touch-callout:none;-webkit-text-size-adjust:none}body,h1,h2,h3,h4,h5,h6,p{margin:0;padding:0}ol,ul,dl{margin:0;padding:0;list-style:none}table{width:100%;border-collapse:collapse;border-spacing:0}a{color:link;text-decoration:none}img{border:none;vertical-align:middle}input,button,select,textarea{font:inherit;line-height:inherit;-webkit-appearance:none}input.disabled,textarea.disabled,select.disabled{cursor:not-allowed;pointer-events:none}input:focus,textarea:focus,select:focus{outline:none}a,area,button,[role="button"],input,label,select,summary,textarea{touch-action:manipulation}[overflow-h]{overflow:hidden !important}[overflow-a]{overflow:auto !important;}[overflow-a].touch{-webkit-overflow-scrolling:touch}.oa{overflow:auto !important}.oam{overflow:auto !important;-webkit-overflow-scrolling:touch}.oh{overflow:hidden !important}::-webkit-input-placeholder{color:#aaa}.th1,.th2{overflow:hidden}.dib-top{vertical-align:top}.dib-middle{vertical-align:middle}.mb,.mbt,.mbb,.mbl,.mbr,.mbtb{position:relative}.btn-large,.btn,.btn-mini{display:inline-block}.th2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.fixed-center,.absolute-center{top:50%;left:50%;transform:translate(-50%,-50%)}.mb:before,.mbt:before,.mbb:before,.mbl:before,.mbr:before,.mbtb:before{content:'';position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:0 0;transform:scale(.5,.5);pointer-events:none;z-index:1;border:none;border-width:0}.bd-dotted{border-style:dotted}.bd-dashed{border-style:dashed}.bd-solid{border-style:solid}.bd-none{border-style:none}.bd{border:none;border-style:solid;border-width:1px}.bt{border:none;border-top-style:solid;border-top-width:1px}.br{border:none;border-right-style:solid;border-right-width:1px}.bb{border:none;border-bottom-style:solid;border-bottom-width:1px}.bl{border:none;border-left-style:solid;border-left-width:1px}.blr{border:none;border-left-style:solid;border-left-width:1px;border-right-style:solid;border-right-width:1px}.btb{border:none;border-top-style:solid;border-top-width:1px;border-bottom-style:solid;border-bottom-width:1px}.bn{border:none;border-style:none;border-width:0}.mb:before{border-width:1px;border-style:solid;border-color:#eee}.mbt:before{border-top-width:1px;border-style:solid;border-color:#eee}.mbb:before{border-bottom-width:1px;border-style:solid;border-color:#eee}.mbl:before{border-left-width:1px;border-style:solid;border-color:#eee}.mbr:before{border-right-width:1px;border-style:solid;border-color:#eee}.mbtb:before{border-top-width:1px;border-bottom-width:1px;border-style:solid;border-color:#eee}.th1,.th2{overflow:hidden}.dib-top{vertical-align:top}.dib-middle{vertical-align:middle}.btn-large,.btn,.btn-mini{display:inline-block}.th2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.fixed-center,.absolute-center{top:50%;left:50%;transform:translate(-50%,-50%)}.btn-large{cursor:pointer;border:1px transparent solid;padding:7px 30px;border-radius:4px;font-size:16px}.btn{cursor:pointer;border:1px transparent solid;padding:5px 17px;border-radius:3px;font-size:14px}.btn-mini{cursor:pointer;border:1px transparent solid;padding:3px 12px;border-radius:2px;font-size:12px}.btn-main{color:#fff;background-color:#f40;border-color:#f40;}.btn-main:hover{color:#fff;background-color:#ff6933;border-color:#ff6933}.btn-default{color:#5c626b;background-color:#fff;border-color:#959ba3;}.btn-default:hover{color:#f40;border-color:#f40;background-color:#f2f2f2}.c-333{color:#262a30}.c-666{color:#5c626b}.c-999{color:#959ba3}.c-000{color:#000}.c-fff{color:#fff}.c-aaa{color:#aaa}.c-ccc{color:#cbcfd6}.c-eee{color:#eee}.c-f2{color:#f2f2f2}.c-f7{color:#f7f8f9}.c-main{color:#f40}.c-link{color:#488ff9}.c-success{color:#2dc888}.c-warning{color:#ffa400}.c-error{color:#f53939}.bg-333{background-color:#262a30}.bg-666{background-color:#5c626b}.bg-999{background-color:#959ba3}.bg-000{background-color:#000}.bg-fff{background-color:#fff}.bg-aaa{background-color:#aaa}.bg-ccc{background-color:#cbcfd6}.bg-eee{background-color:#eee}.bg-f2{background-color:#f2f2f2}.bg-f7{background-color:#f7f8f9}.bg-main{background-color:#f40}.bg-link{background-color:#488ff9}.bg-success{background-color:#2dc888}.bg-warning{background-color:#ffa400}.bg-error{background-color:#f53939}.bd-333{border-color:#262a30}.bd-666{border-color:#5c626b}.bd-999{border-color:#959ba3}.bd-000{border-color:#000}.bd-fff{border-color:#fff}.bd-aaa{border-color:#aaa}.bd-ccc{border-color:#cbcfd6}.bd-eee{border-color:#eee}.bd-f2{border-color:#f2f2f2}.bd-f7{border-color:#f7f8f9}.bd-main{border-color:#f40}.bd-link{border-color:#488ff9}.bd-success{border-color:#2dc888}.bd-warning{border-color:#ffa400}.bd-error{border-color:#f53939}.th1,.th2{overflow:hidden}.dib-top{vertical-align:top}.dib-middle{vertical-align:middle}.th2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.fixed-center,.absolute-center{top:50%;left:50%;transform:translate(-50%,-50%)}.flex,.flex-center,.flex-center-between,.flex-center-justify,.flex-center-align,.flex-between{display:flex}.flex-column{flex-direction:column}.flex-row{flex-direction:row}.flex-wrap{flex-wrap:wrap}.flex-shrink-0{flex-shrink:0}.flex-grow-1{flex-grow:1}.justify-start{justify-content:flex-start}.justify-end{justify-content:flex-end}.justify-center,.flex-center,.flex-center-justify{justify-content:center}.justify-between,.flex-center-between,.flex-between{justify-content:space-between}.justify-around{justify-content:space-around}.items-center,.flex-center,.flex-center-between,.flex-center-align{align-items:center}.items-baseline{align-items:baseline}.content-center{align-content:center}.relative{position:relative}.absolute,.absolute-center,.absolute-bottom{position:absolute}.fixed,.fixed-center,.fixed-bottom{position:fixed}.sticky{position:-webkit-sticky;position:sticky}.fl{float:left}.fr{float:right}.fn{float:none}.dn{display:none}.di{display:inline}.db{display:block}.dib,.dib-middle,.dib-top{display:inline-block}.fixed-bottom{bottom:0}.absolute-bottom{bottom:0}.shadow-block{box-shadow:0 0 4px 2px rgba(0,0,0,0.2)}.shadow-top{box-shadow:0 -2px 4px 0 rgba(0,0,0,0.2)}.shadow-bottom{box-shadow:0 2px 4px 0 rgba(0,0,0,0.2)}.m-auto{margin-left:auto;margin-right:auto}.m5{margin:5px}.vw-m5{margin:1.33vw}.mt5{margin-top:5px}.vw-mt5{margin-top:1.33vw}.mr5{margin-right:5px}.vw-mr5{margin-right:1.33vw}.mb5{margin-bottom:5px}.vw-mb5{margin-bottom:1.33vw}.ml5{margin-left:5px}.vw-ml5{margin-left:1.33vw}.mtb5{margin-top:5px;margin-bottom:5px}.vw-mtb5{margin-top:1.33vw;margin-bottom:1.33vw}.mtr5{margin-top:5px;margin-right:5px}.vw-mtr5{margin-top:1.33vw;margin-right:1.33vw}.mlt5{margin-left:5px;margin-top:5px}.vw-mlt5{margin-left:1.33vw;margin-top:1.33vw}.mlr5{margin-left:5px;margin-right:5px}.vw-mlr5{margin-left:1.33vw;margin-right:1.33vw}.mlb5{margin-left:5px;margin-bottom:5px}.vw-mlb5{margin-left:1.33vw;margin-bottom:1.33vw}.m10{margin:10px}.vw-m10{margin:2.67vw}.mt10{margin-top:10px}.vw-mt10{margin-top:2.67vw}.mr10{margin-right:10px}.vw-mr10{margin-right:2.67vw}.mb10{margin-bottom:10px}.vw-mb10{margin-bottom:2.67vw}.ml10{margin-left:10px}.vw-ml10{margin-left:2.67vw}.mtb10{margin-top:10px;margin-bottom:10px}.vw-mtb10{margin-top:2.67vw;margin-bottom:2.67vw}.mtr10{margin-top:10px;margin-right:10px}.vw-mtr10{margin-top:2.67vw;margin-right:2.67vw}.mlt10{margin-left:10px;margin-top:10px}.vw-mlt10{margin-left:2.67vw;margin-top:2.67vw}.mlr10{margin-left:10px;margin-right:10px}.vw-mlr10{margin-left:2.67vw;margin-right:2.67vw}.mlb10{margin-left:10px;margin-bottom:10px}.vw-mlb10{margin-left:2.67vw;margin-bottom:2.67vw}.m15{margin:15px}.vw-m15{margin:4vw}.mt15{margin-top:15px}.vw-mt15{margin-top:4vw}.mr15{margin-right:15px}.vw-mr15{margin-right:4vw}.mb15{margin-bottom:15px}.vw-mb15{margin-bottom:4vw}.ml15{margin-left:15px}.vw-ml15{margin-left:4vw}.mtb15{margin-top:15px;margin-bottom:15px}.vw-mtb15{margin-top:4vw;margin-bottom:4vw}.mtr15{margin-top:15px;margin-right:15px}.vw-mtr15{margin-top:4vw;margin-right:4vw}.mlt15{margin-left:15px;margin-top:15px}.vw-mlt15{margin-left:4vw;margin-top:4vw}.mlr15{margin-left:15px;margin-right:15px}.vw-mlr15{margin-left:4vw;margin-right:4vw}.mlb15{margin-left:15px;margin-bottom:15px}.vw-mlb15{margin-left:4vw;margin-bottom:4vw}.m20{margin:20px}.vw-m20{margin:5.33vw}.mt20{margin-top:20px}.vw-mt20{margin-top:5.33vw}.mr20{margin-right:20px}.vw-mr20{margin-right:5.33vw}.mb20{margin-bottom:20px}.vw-mb20{margin-bottom:5.33vw}.ml20{margin-left:20px}.vw-ml20{margin-left:5.33vw}.mtb20{margin-top:20px;margin-bottom:20px}.vw-mtb20{margin-top:5.33vw;margin-bottom:5.33vw}.mtr20{margin-top:20px;margin-right:20px}.vw-mtr20{margin-top:5.33vw;margin-right:5.33vw}.mlt20{margin-left:20px;margin-top:20px}.vw-mlt20{margin-left:5.33vw;margin-top:5.33vw}.mlr20{margin-left:20px;margin-right:20px}.vw-mlr20{margin-left:5.33vw;margin-right:5.33vw}.mlb20{margin-left:20px;margin-bottom:20px}.vw-mlb20{margin-left:5.33vw;margin-bottom:5.33vw}.m30{margin:30px}.vw-m30{margin:8vw}.mt30{margin-top:30px}.vw-mt30{margin-top:8vw}.mr30{margin-right:30px}.vw-mr30{margin-right:8vw}.mb30{margin-bottom:30px}.vw-mb30{margin-bottom:8vw}.ml30{margin-left:30px}.vw-ml30{margin-left:8vw}.mtb30{margin-top:30px;margin-bottom:30px}.vw-mtb30{margin-top:8vw;margin-bottom:8vw}.mtr30{margin-top:30px;margin-right:30px}.vw-mtr30{margin-top:8vw;margin-right:8vw}.mlt30{margin-left:30px;margin-top:30px}.vw-mlt30{margin-left:8vw;margin-top:8vw}.mlr30{margin-left:30px;margin-right:30px}.vw-mlr30{margin-left:8vw;margin-right:8vw}.mlb30{margin-left:30px;margin-bottom:30px}.vw-mlb30{margin-left:8vw;margin-bottom:8vw}.m40{margin:40px}.vw-m40{margin:10.67vw}.mt40{margin-top:40px}.vw-mt40{margin-top:10.67vw}.mr40{margin-right:40px}.vw-mr40{margin-right:10.67vw}.mb40{margin-bottom:40px}.vw-mb40{margin-bottom:10.67vw}.ml40{margin-left:40px}.vw-ml40{margin-left:10.67vw}.mtb40{margin-top:40px;margin-bottom:40px}.vw-mtb40{margin-top:10.67vw;margin-bottom:10.67vw}.mtr40{margin-top:40px;margin-right:40px}.vw-mtr40{margin-top:10.67vw;margin-right:10.67vw}.mlt40{margin-left:40px;margin-top:40px}.vw-mlt40{margin-left:10.67vw;margin-top:10.67vw}.mlr40{margin-left:40px;margin-right:40px}.vw-mlr40{margin-left:10.67vw;margin-right:10.67vw}.mlb40{margin-left:40px;margin-bottom:40px}.vw-mlb40{margin-left:10.67vw;margin-bottom:10.67vw}.m45{margin:45px}.vw-m45{margin:12vw}.mt45{margin-top:45px}.vw-mt45{margin-top:12vw}.mr45{margin-right:45px}.vw-mr45{margin-right:12vw}.mb45{margin-bottom:45px}.vw-mb45{margin-bottom:12vw}.ml45{margin-left:45px}.vw-ml45{margin-left:12vw}.mtb45{margin-top:45px;margin-bottom:45px}.vw-mtb45{margin-top:12vw;margin-bottom:12vw}.mtr45{margin-top:45px;margin-right:45px}.vw-mtr45{margin-top:12vw;margin-right:12vw}.mlt45{margin-left:45px;margin-top:45px}.vw-mlt45{margin-left:12vw;margin-top:12vw}.mlr45{margin-left:45px;margin-right:45px}.vw-mlr45{margin-left:12vw;margin-right:12vw}.mlb45{margin-left:45px;margin-bottom:45px}.vw-mlb45{margin-left:12vw;margin-bottom:12vw}.m50{margin:50px}.vw-m50{margin:13.33vw}.mt50{margin-top:50px}.vw-mt50{margin-top:13.33vw}.mr50{margin-right:50px}.vw-mr50{margin-right:13.33vw}.mb50{margin-bottom:50px}.vw-mb50{margin-bottom:13.33vw}.ml50{margin-left:50px}.vw-ml50{margin-left:13.33vw}.mtb50{margin-top:50px;margin-bottom:50px}.vw-mtb50{margin-top:13.33vw;margin-bottom:13.33vw}.mtr50{margin-top:50px;margin-right:50px}.vw-mtr50{margin-top:13.33vw;margin-right:13.33vw}.mlt50{margin-left:50px;margin-top:50px}.vw-mlt50{margin-left:13.33vw;margin-top:13.33vw}.mlr50{margin-left:50px;margin-right:50px}.vw-mlr50{margin-left:13.33vw;margin-right:13.33vw}.mlb50{margin-left:50px;margin-bottom:50px}.vw-mlb50{margin-left:13.33vw;margin-bottom:13.33vw}.m55{margin:55px}.vw-m55{margin:14.67vw}.mt55{margin-top:55px}.vw-mt55{margin-top:14.67vw}.mr55{margin-right:55px}.vw-mr55{margin-right:14.67vw}.mb55{margin-bottom:55px}.vw-mb55{margin-bottom:14.67vw}.ml55{margin-left:55px}.vw-ml55{margin-left:14.67vw}.mtb55{margin-top:55px;margin-bottom:55px}.vw-mtb55{margin-top:14.67vw;margin-bottom:14.67vw}.mtr55{margin-top:55px;margin-right:55px}.vw-mtr55{margin-top:14.67vw;margin-right:14.67vw}.mlt55{margin-left:55px;margin-top:55px}.vw-mlt55{margin-left:14.67vw;margin-top:14.67vw}.mlr55{margin-left:55px;margin-right:55px}.vw-mlr55{margin-left:14.67vw;margin-right:14.67vw}.mlb55{margin-left:55px;margin-bottom:55px}.vw-mlb55{margin-left:14.67vw;margin-bottom:14.67vw}.m60{margin:60px}.vw-m60{margin:16vw}.mt60{margin-top:60px}.vw-mt60{margin-top:16vw}.mr60{margin-right:60px}.vw-mr60{margin-right:16vw}.mb60{margin-bottom:60px}.vw-mb60{margin-bottom:16vw}.ml60{margin-left:60px}.vw-ml60{margin-left:16vw}.mtb60{margin-top:60px;margin-bottom:60px}.vw-mtb60{margin-top:16vw;margin-bottom:16vw}.mtr60{margin-top:60px;margin-right:60px}.vw-mtr60{margin-top:16vw;margin-right:16vw}.mlt60{margin-left:60px;margin-top:60px}.vw-mlt60{margin-left:16vw;margin-top:16vw}.mlr60{margin-left:60px;margin-right:60px}.vw-mlr60{margin-left:16vw;margin-right:16vw}.mlb60{margin-left:60px;margin-bottom:60px}.vw-mlb60{margin-left:16vw;margin-bottom:16vw}.p5{padding:5px}.vw-p5{padding:1.33vw}.pt5{padding-top:5px}.vw-pt5{padding-top:1.33vw}.pr5{padding-right:5px}.vw-pr5{padding-right:1.33vw}.pb5{padding-bottom:5px}.vw-pb5{padding-bottom:1.33vw}.pl5{padding-left:5px}.vw-pl5{padding-left:1.33vw}.ptb5{padding-top:5px;padding-bottom:5px}.vw-ptb5{padding-top:1.33vw;padding-bottom:1.33vw}.ptr5{padding-top:5px;padding-right:5px}.vw-ptr5{padding-top:1.33vw;padding-right:1.33vw}.plt5{padding-left:5px;padding-top:5px}.vw-plt5{padding-left:1.33vw;padding-top:1.33vw}.plr5{padding-left:5px;padding-right:5px}.vw-plr5{padding-left:1.33vw;padding-right:1.33vw}.plb5{padding-left:5px;padding-bottom:5px}.vw-plb5{padding-left:1.33vw;padding-bottom:1.33vw}.p10{padding:10px}.vw-p10{padding:2.67vw}.pt10{padding-top:10px}.vw-pt10{padding-top:2.67vw}.pr10{padding-right:10px}.vw-pr10{padding-right:2.67vw}.pb10{padding-bottom:10px}.vw-pb10{padding-bottom:2.67vw}.pl10{padding-left:10px}.vw-pl10{padding-left:2.67vw}.ptb10{padding-top:10px;padding-bottom:10px}.vw-ptb10{padding-top:2.67vw;padding-bottom:2.67vw}.ptr10{padding-top:10px;padding-right:10px}.vw-ptr10{padding-top:2.67vw;padding-right:2.67vw}.plt10{padding-left:10px;padding-top:10px}.vw-plt10{padding-left:2.67vw;padding-top:2.67vw}.plr10{padding-left:10px;padding-right:10px}.vw-plr10{padding-left:2.67vw;padding-right:2.67vw}.plb10{padding-left:10px;padding-bottom:10px}.vw-plb10{padding-left:2.67vw;padding-bottom:2.67vw}.p15{padding:15px}.vw-p15{padding:4vw}.pt15{padding-top:15px}.vw-pt15{padding-top:4vw}.pr15{padding-right:15px}.vw-pr15{padding-right:4vw}.pb15{padding-bottom:15px}.vw-pb15{padding-bottom:4vw}.pl15{padding-left:15px}.vw-pl15{padding-left:4vw}.ptb15{padding-top:15px;padding-bottom:15px}.vw-ptb15{padding-top:4vw;padding-bottom:4vw}.ptr15{padding-top:15px;padding-right:15px}.vw-ptr15{padding-top:4vw;padding-right:4vw}.plt15{padding-left:15px;padding-top:15px}.vw-plt15{padding-left:4vw;padding-top:4vw}.plr15{padding-left:15px;padding-right:15px}.vw-plr15{padding-left:4vw;padding-right:4vw}.plb15{padding-left:15px;padding-bottom:15px}.vw-plb15{padding-left:4vw;padding-bottom:4vw}.p20{padding:20px}.vw-p20{padding:5.33vw}.pt20{padding-top:20px}.vw-pt20{padding-top:5.33vw}.pr20{padding-right:20px}.vw-pr20{padding-right:5.33vw}.pb20{padding-bottom:20px}.vw-pb20{padding-bottom:5.33vw}.pl20{padding-left:20px}.vw-pl20{padding-left:5.33vw}.ptb20{padding-top:20px;padding-bottom:20px}.vw-ptb20{padding-top:5.33vw;padding-bottom:5.33vw}.ptr20{padding-top:20px;padding-right:20px}.vw-ptr20{padding-top:5.33vw;padding-right:5.33vw}.plt20{padding-left:20px;padding-top:20px}.vw-plt20{padding-left:5.33vw;padding-top:5.33vw}.plr20{padding-left:20px;padding-right:20px}.vw-plr20{padding-left:5.33vw;padding-right:5.33vw}.plb20{padding-left:20px;padding-bottom:20px}.vw-plb20{padding-left:5.33vw;padding-bottom:5.33vw}.p30{padding:30px}.vw-p30{padding:8vw}.pt30{padding-top:30px}.vw-pt30{padding-top:8vw}.pr30{padding-right:30px}.vw-pr30{padding-right:8vw}.pb30{padding-bottom:30px}.vw-pb30{padding-bottom:8vw}.pl30{padding-left:30px}.vw-pl30{padding-left:8vw}.ptb30{padding-top:30px;padding-bottom:30px}.vw-ptb30{padding-top:8vw;padding-bottom:8vw}.ptr30{padding-top:30px;padding-right:30px}.vw-ptr30{padding-top:8vw;padding-right:8vw}.plt30{padding-left:30px;padding-top:30px}.vw-plt30{padding-left:8vw;padding-top:8vw}.plr30{padding-left:30px;padding-right:30px}.vw-plr30{padding-left:8vw;padding-right:8vw}.plb30{padding-left:30px;padding-bottom:30px}.vw-plb30{padding-left:8vw;padding-bottom:8vw}.p40{padding:40px}.vw-p40{padding:10.67vw}.pt40{padding-top:40px}.vw-pt40{padding-top:10.67vw}.pr40{padding-right:40px}.vw-pr40{padding-right:10.67vw}.pb40{padding-bottom:40px}.vw-pb40{padding-bottom:10.67vw}.pl40{padding-left:40px}.vw-pl40{padding-left:10.67vw}.ptb40{padding-top:40px;padding-bottom:40px}.vw-ptb40{padding-top:10.67vw;padding-bottom:10.67vw}.ptr40{padding-top:40px;padding-right:40px}.vw-ptr40{padding-top:10.67vw;padding-right:10.67vw}.plt40{padding-left:40px;padding-top:40px}.vw-plt40{padding-left:10.67vw;padding-top:10.67vw}.plr40{padding-left:40px;padding-right:40px}.vw-plr40{padding-left:10.67vw;padding-right:10.67vw}.plb40{padding-left:40px;padding-bottom:40px}.vw-plb40{padding-left:10.67vw;padding-bottom:10.67vw}.p45{padding:45px}.vw-p45{padding:12vw}.pt45{padding-top:45px}.vw-pt45{padding-top:12vw}.pr45{padding-right:45px}.vw-pr45{padding-right:12vw}.pb45{padding-bottom:45px}.vw-pb45{padding-bottom:12vw}.pl45{padding-left:45px}.vw-pl45{padding-left:12vw}.ptb45{padding-top:45px;padding-bottom:45px}.vw-ptb45{padding-top:12vw;padding-bottom:12vw}.ptr45{padding-top:45px;padding-right:45px}.vw-ptr45{padding-top:12vw;padding-right:12vw}.plt45{padding-left:45px;padding-top:45px}.vw-plt45{padding-left:12vw;padding-top:12vw}.plr45{padding-left:45px;padding-right:45px}.vw-plr45{padding-left:12vw;padding-right:12vw}.plb45{padding-left:45px;padding-bottom:45px}.vw-plb45{padding-left:12vw;padding-bottom:12vw}.p50{padding:50px}.vw-p50{padding:13.33vw}.pt50{padding-top:50px}.vw-pt50{padding-top:13.33vw}.pr50{padding-right:50px}.vw-pr50{padding-right:13.33vw}.pb50{padding-bottom:50px}.vw-pb50{padding-bottom:13.33vw}.pl50{padding-left:50px}.vw-pl50{padding-left:13.33vw}.ptb50{padding-top:50px;padding-bottom:50px}.vw-ptb50{padding-top:13.33vw;padding-bottom:13.33vw}.ptr50{padding-top:50px;padding-right:50px}.vw-ptr50{padding-top:13.33vw;padding-right:13.33vw}.plt50{padding-left:50px;padding-top:50px}.vw-plt50{padding-left:13.33vw;padding-top:13.33vw}.plr50{padding-left:50px;padding-right:50px}.vw-plr50{padding-left:13.33vw;padding-right:13.33vw}.plb50{padding-left:50px;padding-bottom:50px}.vw-plb50{padding-left:13.33vw;padding-bottom:13.33vw}.p55{padding:55px}.vw-p55{padding:14.67vw}.pt55{padding-top:55px}.vw-pt55{padding-top:14.67vw}.pr55{padding-right:55px}.vw-pr55{padding-right:14.67vw}.pb55{padding-bottom:55px}.vw-pb55{padding-bottom:14.67vw}.pl55{padding-left:55px}.vw-pl55{padding-left:14.67vw}.ptb55{padding-top:55px;padding-bottom:55px}.vw-ptb55{padding-top:14.67vw;padding-bottom:14.67vw}.ptr55{padding-top:55px;padding-right:55px}.vw-ptr55{padding-top:14.67vw;padding-right:14.67vw}.plt55{padding-left:55px;padding-top:55px}.vw-plt55{padding-left:14.67vw;padding-top:14.67vw}.plr55{padding-left:55px;padding-right:55px}.vw-plr55{padding-left:14.67vw;padding-right:14.67vw}.plb55{padding-left:55px;padding-bottom:55px}.vw-plb55{padding-left:14.67vw;padding-bottom:14.67vw}.p60{padding:60px}.vw-p60{padding:16vw}.pt60{padding-top:60px}.vw-pt60{padding-top:16vw}.pr60{padding-right:60px}.vw-pr60{padding-right:16vw}.pb60{padding-bottom:60px}.vw-pb60{padding-bottom:16vw}.pl60{padding-left:60px}.vw-pl60{padding-left:16vw}.ptb60{padding-top:60px;padding-bottom:60px}.vw-ptb60{padding-top:16vw;padding-bottom:16vw}.ptr60{padding-top:60px;padding-right:60px}.vw-ptr60{padding-top:16vw;padding-right:16vw}.plt60{padding-left:60px;padding-top:60px}.vw-plt60{padding-left:16vw;padding-top:16vw}.plr60{padding-left:60px;padding-right:60px}.vw-plr60{padding-left:16vw;padding-right:16vw}.plb60{padding-left:60px;padding-bottom:60px}.vw-plb60{padding-left:16vw;padding-bottom:16vw}.w30{width:30px}.w40{width:40px}.w50{width:50px}.w60{width:60px}.w70{width:70px}.w80{width:80px}.w90{width:90px}.w100{width:100px}.w200{width:200px}.h30{height:30px}.h35{height:35px}.h40{height:40px}.h45{height:45px}.h50{height:50px}.h55{height:55px}.h60{height:60px}.h65{height:65px}.h70{height:70px}.h80{height:80px}.h90{height:90px}.h100{height:100px}.f10{font-size:10px}.vw-f10{font-size:2.67vw}.f12{font-size:12px}.vw-f12{font-size:3.2vw}.f13{font-size:13px}.vw-f13{font-size:3.47vw}.f14{font-size:14px}.vw-f14{font-size:3.73vw}.f15{font-size:15px}.vw-f15{font-size:4vw}.f16{font-size:16px}.vw-f16{font-size:4.27vw}.f17{font-size:17px}.vw-f17{font-size:4.53vw}.f18{font-size:18px}.vw-f18{font-size:4.8vw}.f20{font-size:20px}.vw-f20{font-size:5.33vw}.f24{font-size:24px}.vw-f24{font-size:6.4vw}.f28{font-size:28px}.vw-f28{font-size:7.47vw}.f32{font-size:32px}.vw-f32{font-size:8.53vw}.f40{font-size:40px}.vw-f40{font-size:10.67vw}.t0{top:0}.r0{right:0}.b0{bottom:0}.l0{left:0}.tb0{top:0;bottom:0}.tr0{top:0;right:0}.lt0{left:0;top:0}.lr0{left:0;right:0}.lb0{left:0;bottom:0}.t10{top:10px}.vw-t10{top:2.67vw}.r10{right:10px}.vw-r10{right:2.67vw}.b10{bottom:10px}.vw-b10{bottom:2.67vw}.l10{left:10px}.vw-l10{left:2.67vw}.tb10{top:10px;bottom:10px}.vw-tb10{top:2.67vw;bottom:2.67vw}.tr10{top:10px;right:10px}.vw-tr10{top:2.67vw;right:2.67vw}.lt10{left:10px;top:10px}.vw-lt10{left:2.67vw;top:2.67vw}.lr10{left:10px;right:10px}.vw-lr10{left:2.67vw;right:2.67vw}.lb10{left:10px;bottom:10px}.vw-lb10{left:2.67vw;bottom:2.67vw}.t20{top:20px}.vw-t20{top:5.33vw}.r20{right:20px}.vw-r20{right:5.33vw}.b20{bottom:20px}.vw-b20{bottom:5.33vw}.l20{left:20px}.vw-l20{left:5.33vw}.tb20{top:20px;bottom:20px}.vw-tb20{top:5.33vw;bottom:5.33vw}.tr20{top:20px;right:20px}.vw-tr20{top:5.33vw;right:5.33vw}.lt20{left:20px;top:20px}.vw-lt20{left:5.33vw;top:5.33vw}.lr20{left:20px;right:20px}.vw-lr20{left:5.33vw;right:5.33vw}.lb20{left:20px;bottom:20px}.vw-lb20{left:5.33vw;bottom:5.33vw}.t30{top:30px}.vw-t30{top:8vw}.r30{right:30px}.vw-r30{right:8vw}.b30{bottom:30px}.vw-b30{bottom:8vw}.l30{left:30px}.vw-l30{left:8vw}.tb30{top:30px;bottom:30px}.vw-tb30{top:8vw;bottom:8vw}.tr30{top:30px;right:30px}.vw-tr30{top:8vw;right:8vw}.lt30{left:30px;top:30px}.vw-lt30{left:8vw;top:8vw}.lr30{left:30px;right:30px}.vw-lr30{left:8vw;right:8vw}.lb30{left:30px;bottom:30px}.vw-lb30{left:8vw;bottom:8vw}.t40{top:40px}.vw-t40{top:10.67vw}.r40{right:40px}.vw-r40{right:10.67vw}.b40{bottom:40px}.vw-b40{bottom:10.67vw}.l40{left:40px}.vw-l40{left:10.67vw}.tb40{top:40px;bottom:40px}.vw-tb40{top:10.67vw;bottom:10.67vw}.tr40{top:40px;right:40px}.vw-tr40{top:10.67vw;right:10.67vw}.lt40{left:40px;top:40px}.vw-lt40{left:10.67vw;top:10.67vw}.lr40{left:40px;right:40px}.vw-lr40{left:10.67vw;right:10.67vw}.lb40{left:40px;bottom:40px}.vw-lb40{left:10.67vw;bottom:10.67vw}.t50{top:50px}.vw-t50{top:13.33vw}.r50{right:50px}.vw-r50{right:13.33vw}.b50{bottom:50px}.vw-b50{bottom:13.33vw}.l50{left:50px}.vw-l50{left:13.33vw}.tb50{top:50px;bottom:50px}.vw-tb50{top:13.33vw;bottom:13.33vw}.tr50{top:50px;right:50px}.vw-tr50{top:13.33vw;right:13.33vw}.lt50{left:50px;top:50px}.vw-lt50{left:13.33vw;top:13.33vw}.lr50{left:50px;right:50px}.vw-lr50{left:13.33vw;right:13.33vw}.lb50{left:50px;bottom:50px}.vw-lb50{left:13.33vw;bottom:13.33vw}.z1{z-index:1}.z2{z-index:2}.z3{z-index:3}.z4{z-index:4}.z5{z-index:5}.z6{z-index:6}.z7{z-index:7}.z8{z-index:8}.z9{z-index:9}.z1000{z-index:1000}.z1001{z-index:1001}.z1002{z-index:1002}.z1003{z-index:1003}.z9999{z-index:9999}.z10000{z-index:10000}.br1{border-radius:1px}.br2{border-radius:2px}.br3{border-radius:3px}.br4{border-radius:4px}.br5{border-radius:5px}.br6{border-radius:6px}.br7{border-radius:7px}.br8{border-radius:8px}.br10{border-radius:10px}.br15{border-radius:15px}.br20{border-radius:20px}.width-20{width:20%}.width-25{width:25%}.width-33{width:33.33333%}.width-50{width:50%}.width-100{width:100%}.height-50{height:50%}.height-100{height:100%}.max-width-50{max-width:50%}.max-width-100{max-width:100%}.min-height-50{min-height:50%}.min-height-100{min-height:100%}.th1,.th2{overflow:hidden}.th2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.tl{text-align:left}.tc{text-align:center}.tr{text-align:right}.td2{text-indent:2em}.i{font-style:italic}.b{font-weight:bold}.underline{text-decoration:underline}.strike{text-decoration:line-through}.ellipsis,.th1,.th2{text-overflow:ellipsis}.break{word-break:break-all}.nowrap,.th1{white-space:nowrap}.cp{cursor:pointer}.cm{cursor:move}.font-normalize{font-family:PingFang
+	SC,Helvetica Neue,Arial,sans-serif}</style>
+	<style type="text/css">.share-article { min-height: 100vh; } .share-article .share-tree { position: fixed; top: 122px; bottom: 120px; width: 250px; background: #fff; margin-right: 2px; left: calc((100vw - 700px) / 2 - 250px - 10px); } .share-article .share-content { width: 700px; } .share-article .share-toc { border: 1px solid red; } .share-article .markdown-toc { width: 250px; position: fixed; right: calc((100vw - 700px) / 2 - 250px - 10px); top: 120px; bottom: 120px; overflow: auto; font-size: 12px; } .share-article .markdown-toc:before { content: '文章目录'; padding-left: 15px; } .share-article .markdown-toc .markdown-toc-list { padding: 10px 15px 15px 15px!important; background: #f7f8f9; border-left: 2px #eee solid; } .share-article .markdown-toc a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #999; } .share-article .markdown-toc a:hover { color: #3b8ff6; } .share-article .markdown-toc ul, .share-article .markdown-toc ol { list-style: none; padding-left: 1em; }</style>
+	<link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css"></head>
+	<style type="text/css">
+		p {
+			border: 1px solid red !important;
+		}
+
+		p img {
+			width: 100%;
+			height: auto;
+			border: 1px solid red !important;
+		}
+	</style>
+<body class="bg-f7">
+<noscript>
+	<strong>We're sorry but doc-fe doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
+<div id="app">
+	<div class="share-article">
+		<!---->
+		<div class="flex-center">
+			<div class="share-content">
+				<div class="ptb20 plr15">
+					<p class="f24 b" style="color: rgb(0, 0, 0);">啦啦啦 - JS 基础系列之字符串</p>
+					</div>
+				<div id="content" class="markdown-body editormd-html-preview">
+					<p>
+						<img src="https://global.uban360.com/sfs/file?digest=fidfec9c397391829c1e508191571f98cea" alt=""></p>
+					<blockquote>
+						<p>图片来源
+							<a href="https://www.beansmile.com/blog/posts/javascript-prototype-inherit">https://www.beansmile.com/blog/posts/javascript-prototype-inherit</a></p>
+					</blockquote>
+					<div class="markdown-toc editormd-markdown-toc">
+						<ul class="markdown-toc-list">
+							<li><html lang="zh-cn" class="font-normalize f14"><head>
+								<meta charset="utf-8">
+								<meta http-equiv="X-UA-Compatible" content="IE=edge">
+								<meta name="viewport" content="width=device-width,initial-scale=1.0">
+								<!--[if IE]><link rel="icon" href="/favicon.ico"><![endif]-->
+								<title>讯盟文档</title>
+								<link rel="stylesheet" href="/ant/index.css">
+								<link rel="stylesheet" href="/lib/editormd.css">
+								<link href="/js/project.js" rel="prefetch"><link href="/js/project~share-out.js" rel="prefetch"><link href="/js/share-out.js" rel="prefetch"><link href="/share-out.b8e4cfce7b91dda69bb9.hot-update.js" rel="prefetch"><link href="/js/app.js" rel="preload" as="script"><link href="/js/chunk-vendors.js" rel="preload" as="script"><link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png"><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#4DBA87"><meta name="apple-mobile-web-app-capable" content="no"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="doc-fe"><link rel="apple-touch-icon" href="/img/icons/apple-touch-icon-152x152.png"><link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#4DBA87"><meta name="msapplication-TileImage" content="/img/icons/msapplication-icon-144x144.png"><meta name="msapplication-TileColor" content="#000000"><style type="text/css">.aside {
+								float: left;
+								width: 220px;
+								height: calc(100vh - 56px);
+								border-right: 1px #CBCFD6 solid;
+								overflow: auto;
+								padding-bottom: 50px;
+							}
+							.center {
+								margin-left: 220px;
+								height: calc(100vh - 56px);
+								overflow: auto;
+							}
+							.center__content {
+								width: 880px;
+								margin: 0 auto;
+							}
+							.markdown-body ul {
+								list-style: disc;
+							}
+							.markdown-body ol ol .markdown-body ul ol {
+								list-style-type: lower-roman;
+							}
+							.markdown-body ol ol .markdown-body ul ol ul {
+								list-style: square;
+							}
+							.markdown-body ol ol .markdown-body ul ol ol {
+								list-style: lower-alpha;
+							}
+							.markdown-body ul ul ol,
+							.markdown-body ol ul ol {
+								list-style: lower-alpha;
+							}
+							.markdown-body ol {
+								list-style: decimal;
+							}
+							.pop__menu--item {
+								min-width: 80px;
+								padding: 5px 10px;
+								cursor: pointer;
+							}
+							.pop__menu--item:hover {
+								background: #f7f8f9;
+							}
+							</style><style type="text/css">.header {
+								position: relative;
+								height: 56px;
+								background: #fff;
+								box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+								z-index: 1;
+							}
+							.header .ant-input {
+								border-radius: 16px;
+							}
+							.header .focus-large {
+								width: 300px;
+							}
+							</style><style type="text/css"></style><style type="text/css">.prompt__modal {
+								position: fixed;
+								z-index: 100000;
+								width: 100%;
+								top: 0;
+								bottom: 0;
+								left: 0;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								background-color: rgba(0, 0, 0, 0.5);
+							}
+							.prompt__content {
+								width: 450px;
+								border-radius: 4px;
+								box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+								pointer-events: auto;
+								padding: 0 0 24px;
+								background-color: #fff;
+							}
+							.prompt__title {
+								line-height: 55px;
+								font-size: 16px;
+								padding: 0 15px;
+								border-bottom: 1px solid #e8e8e8;
+							}
+							.prompt__footer {
+								border-top: 1px solid #e8e8e8;
+							}
+							.doc-zoom-enter > div {
+								transform: scale(0.3);
+							}
+							.doc-zoom-enter-active {
+								transition: transform 0.3s;
+							}
+							.doc-zoom-enter-active > div {
+								transition: transform 0.3s;
+							}
+							</style><style type="text/css">.aside {
+								position: relative;
+							}
+							.aside__menu--item {
+								position: relative;
+								display: flex;
+								align-items: center;
+								height: 44px;
+								padding-left: 40px;
+								cursor: pointer;
+							}
+							.aside__menu--item:before {
+								display: none;
+								content: '';
+								position: absolute;
+								left: 0;
+								width: 4px;
+								height: 100%;
+								background: #1B90FF;
+							}
+							.aside__menu--item:hover,
+							.aside__menu--item.active {
+								background: #EDF4FD;
+							}
+							.aside__menu--item:hover:before,
+							.aside__menu--item.active:before {
+								display: block;
+							}
+							.aside__copy {
+								border-top: 1px #CBCFD6 solid;
+								position: absolute;
+								bottom: 30px;
+								left: 20px;
+								right: 20px;
+								padding-top: 30px;
+								text-align: center;
+							}
+							.center__content .project-item {
+								position: relative;
+								width: 280px;
+								height: 160px;
+								background: #ffffff;
+								box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.04);
+								border-radius: 2px;
+								margin-top: 20px;
+								text-align: center;
+								padding: 30px 20px 0 20px;
+							}
+							.center__content .project-item:not(:nth-of-type(3n)) {
+								margin-right: 20px;
+							}
+							.center__content .project-item__setting {
+								position: absolute;
+								cursor: pointer;
+								top: 10px;
+								right: 10px;
+							}
+							</style><style type="text/css">html{box-sizing:border-box;-ms-overflow-style:scrollbar;-webkit-tap-highlight-color:rgba(0,0,0,0)}*,*::before,*::after{box-sizing:inherit}body{-webkit-touch-callout:none;-webkit-text-size-adjust:none}body,h1,h2,h3,h4,h5,h6,p{margin:0;padding:0}ol,ul,dl{margin:0;padding:0;list-style:none}table{width:100%;border-collapse:collapse;border-spacing:0}a{color:link;text-decoration:none}img{border:none;vertical-align:middle}input,button,select,textarea{font:inherit;line-height:inherit;-webkit-appearance:none}input.disabled,textarea.disabled,select.disabled{cursor:not-allowed;pointer-events:none}input:focus,textarea:focus,select:focus{outline:none}a,area,button,[role="button"],input,label,select,summary,textarea{touch-action:manipulation}[overflow-h]{overflow:hidden !important}[overflow-a]{overflow:auto !important;}[overflow-a].touch{-webkit-overflow-scrolling:touch}.oa{overflow:auto !important}.oam{overflow:auto !important;-webkit-overflow-scrolling:touch}.oh{overflow:hidden !important}::-webkit-input-placeholder{color:#aaa}.th1,.th2{overflow:hidden}.dib-top{vertical-align:top}.dib-middle{vertical-align:middle}.mb,.mbt,.mbb,.mbl,.mbr,.mbtb{position:relative}.btn-large,.btn,.btn-mini{display:inline-block}.th2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.fixed-center,.absolute-center{top:50%;left:50%;transform:translate(-50%,-50%)}.mb:before,.mbt:before,.mbb:before,.mbl:before,.mbr:before,.mbtb:before{content:'';position:absolute;top:0;left:0;width:200%;height:200%;transform-origin:0 0;transform:scale(.5,.5);pointer-events:none;z-index:1;border:none;border-width:0}.bd-dotted{border-style:dotted}.bd-dashed{border-style:dashed}.bd-solid{border-style:solid}.bd-none{border-style:none}.bd{border:none;border-style:solid;border-width:1px}.bt{border:none;border-top-style:solid;border-top-width:1px}.br{border:none;border-right-style:solid;border-right-width:1px}.bb{border:none;border-bottom-style:solid;border-bottom-width:1px}.bl{border:none;border-left-style:solid;border-left-width:1px}.blr{border:none;border-left-style:solid;border-left-width:1px;border-right-style:solid;border-right-width:1px}.btb{border:none;border-top-style:solid;border-top-width:1px;border-bottom-style:solid;border-bottom-width:1px}.bn{border:none;border-style:none;border-width:0}.mb:before{border-width:1px;border-style:solid;border-color:#eee}.mbt:before{border-top-width:1px;border-style:solid;border-color:#eee}.mbb:before{border-bottom-width:1px;border-style:solid;border-color:#eee}.mbl:before{border-left-width:1px;border-style:solid;border-color:#eee}.mbr:before{border-right-width:1px;border-style:solid;border-color:#eee}.mbtb:before{border-top-width:1px;border-bottom-width:1px;border-style:solid;border-color:#eee}.th1,.th2{overflow:hidden}.dib-top{vertical-align:top}.dib-middle{vertical-align:middle}.btn-large,.btn,.btn-mini{display:inline-block}.th2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.fixed-center,.absolute-center{top:50%;left:50%;transform:translate(-50%,-50%)}.btn-large{cursor:pointer;border:1px transparent solid;padding:7px 30px;border-radius:4px;font-size:16px}.btn{cursor:pointer;border:1px transparent solid;padding:5px 17px;border-radius:3px;font-size:14px}.btn-mini{cursor:pointer;border:1px transparent solid;padding:3px 12px;border-radius:2px;font-size:12px}.btn-main{color:#fff;background-color:#f40;border-color:#f40;}.btn-main:hover{color:#fff;background-color:#ff6933;border-color:#ff6933}.btn-default{color:#5c626b;background-color:#fff;border-color:#959ba3;}.btn-default:hover{color:#f40;border-color:#f40;background-color:#f2f2f2}.c-333{color:#262a30}.c-666{color:#5c626b}.c-999{color:#959ba3}.c-000{color:#000}.c-fff{color:#fff}.c-aaa{color:#aaa}.c-ccc{color:#cbcfd6}.c-eee{color:#eee}.c-f2{color:#f2f2f2}.c-f7{color:#f7f8f9}.c-main{color:#f40}.c-link{color:#488ff9}.c-success{color:#2dc888}.c-warning{color:#ffa400}.c-error{color:#f53939}.bg-333{background-color:#262a30}.bg-666{background-color:#5c626b}.bg-999{background-color:#959ba3}.bg-000{background-color:#000}.bg-fff{background-color:#fff}.bg-aaa{background-color:#aaa}.bg-ccc{background-color:#cbcfd6}.bg-eee{background-color:#eee}.bg-f2{background-color:#f2f2f2}.bg-f7{background-color:#f7f8f9}.bg-main{background-color:#f40}.bg-link{background-color:#488ff9}.bg-success{background-color:#2dc888}.bg-warning{background-color:#ffa400}.bg-error{background-color:#f53939}.bd-333{border-color:#262a30}.bd-666{border-color:#5c626b}.bd-999{border-color:#959ba3}.bd-000{border-color:#000}.bd-fff{border-color:#fff}.bd-aaa{border-color:#aaa}.bd-ccc{border-color:#cbcfd6}.bd-eee{border-color:#eee}.bd-f2{border-color:#f2f2f2}.bd-f7{border-color:#f7f8f9}.bd-main{border-color:#f40}.bd-link{border-color:#488ff9}.bd-success{border-color:#2dc888}.bd-warning{border-color:#ffa400}.bd-error{border-color:#f53939}.th1,.th2{overflow:hidden}.dib-top{vertical-align:top}.dib-middle{vertical-align:middle}.th2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.fixed-center,.absolute-center{top:50%;left:50%;transform:translate(-50%,-50%)}.flex,.flex-center,.flex-center-between,.flex-center-justify,.flex-center-align,.flex-between{display:flex}.flex-column{flex-direction:column}.flex-row{flex-direction:row}.flex-wrap{flex-wrap:wrap}.flex-shrink-0{flex-shrink:0}.flex-grow-1{flex-grow:1}.justify-start{justify-content:flex-start}.justify-end{justify-content:flex-end}.justify-center,.flex-center,.flex-center-justify{justify-content:center}.justify-between,.flex-center-between,.flex-between{justify-content:space-between}.justify-around{justify-content:space-around}.items-center,.flex-center,.flex-center-between,.flex-center-align{align-items:center}.items-baseline{align-items:baseline}.content-center{align-content:center}.relative{position:relative}.absolute,.absolute-center,.absolute-bottom{position:absolute}.fixed,.fixed-center,.fixed-bottom{position:fixed}.sticky{position:-webkit-sticky;position:sticky}.fl{float:left}.fr{float:right}.fn{float:none}.dn{display:none}.di{display:inline}.db{display:block}.dib,.dib-middle,.dib-top{display:inline-block}.fixed-bottom{bottom:0}.absolute-bottom{bottom:0}.shadow-block{box-shadow:0 0 4px 2px rgba(0,0,0,0.2)}.shadow-top{box-shadow:0 -2px 4px 0 rgba(0,0,0,0.2)}.shadow-bottom{box-shadow:0 2px 4px 0 rgba(0,0,0,0.2)}.m-auto{margin-left:auto;margin-right:auto}.m5{margin:5px}.vw-m5{margin:1.33vw}.mt5{margin-top:5px}.vw-mt5{margin-top:1.33vw}.mr5{margin-right:5px}.vw-mr5{margin-right:1.33vw}.mb5{margin-bottom:5px}.vw-mb5{margin-bottom:1.33vw}.ml5{margin-left:5px}.vw-ml5{margin-left:1.33vw}.mtb5{margin-top:5px;margin-bottom:5px}.vw-mtb5{margin-top:1.33vw;margin-bottom:1.33vw}.mtr5{margin-top:5px;margin-right:5px}.vw-mtr5{margin-top:1.33vw;margin-right:1.33vw}.mlt5{margin-left:5px;margin-top:5px}.vw-mlt5{margin-left:1.33vw;margin-top:1.33vw}.mlr5{margin-left:5px;margin-right:5px}.vw-mlr5{margin-left:1.33vw;margin-right:1.33vw}.mlb5{margin-left:5px;margin-bottom:5px}.vw-mlb5{margin-left:1.33vw;margin-bottom:1.33vw}.m10{margin:10px}.vw-m10{margin:2.67vw}.mt10{margin-top:10px}.vw-mt10{margin-top:2.67vw}.mr10{margin-right:10px}.vw-mr10{margin-right:2.67vw}.mb10{margin-bottom:10px}.vw-mb10{margin-bottom:2.67vw}.ml10{margin-left:10px}.vw-ml10{margin-left:2.67vw}.mtb10{margin-top:10px;margin-bottom:10px}.vw-mtb10{margin-top:2.67vw;margin-bottom:2.67vw}.mtr10{margin-top:10px;margin-right:10px}.vw-mtr10{margin-top:2.67vw;margin-right:2.67vw}.mlt10{margin-left:10px;margin-top:10px}.vw-mlt10{margin-left:2.67vw;margin-top:2.67vw}.mlr10{margin-left:10px;margin-right:10px}.vw-mlr10{margin-left:2.67vw;margin-right:2.67vw}.mlb10{margin-left:10px;margin-bottom:10px}.vw-mlb10{margin-left:2.67vw;margin-bottom:2.67vw}.m15{margin:15px}.vw-m15{margin:4vw}.mt15{margin-top:15px}.vw-mt15{margin-top:4vw}.mr15{margin-right:15px}.vw-mr15{margin-right:4vw}.mb15{margin-bottom:15px}.vw-mb15{margin-bottom:4vw}.ml15{margin-left:15px}.vw-ml15{margin-left:4vw}.mtb15{margin-top:15px;margin-bottom:15px}.vw-mtb15{margin-top:4vw;margin-bottom:4vw}.mtr15{margin-top:15px;margin-right:15px}.vw-mtr15{margin-top:4vw;margin-right:4vw}.mlt15{margin-left:15px;margin-top:15px}.vw-mlt15{margin-left:4vw;margin-top:4vw}.mlr15{margin-left:15px;margin-right:15px}.vw-mlr15{margin-left:4vw;margin-right:4vw}.mlb15{margin-left:15px;margin-bottom:15px}.vw-mlb15{margin-left:4vw;margin-bottom:4vw}.m20{margin:20px}.vw-m20{margin:5.33vw}.mt20{margin-top:20px}.vw-mt20{margin-top:5.33vw}.mr20{margin-right:20px}.vw-mr20{margin-right:5.33vw}.mb20{margin-bottom:20px}.vw-mb20{margin-bottom:5.33vw}.ml20{margin-left:20px}.vw-ml20{margin-left:5.33vw}.mtb20{margin-top:20px;margin-bottom:20px}.vw-mtb20{margin-top:5.33vw;margin-bottom:5.33vw}.mtr20{margin-top:20px;margin-right:20px}.vw-mtr20{margin-top:5.33vw;margin-right:5.33vw}.mlt20{margin-left:20px;margin-top:20px}.vw-mlt20{margin-left:5.33vw;margin-top:5.33vw}.mlr20{margin-left:20px;margin-right:20px}.vw-mlr20{margin-left:5.33vw;margin-right:5.33vw}.mlb20{margin-left:20px;margin-bottom:20px}.vw-mlb20{margin-left:5.33vw;margin-bottom:5.33vw}.m30{margin:30px}.vw-m30{margin:8vw}.mt30{margin-top:30px}.vw-mt30{margin-top:8vw}.mr30{margin-right:30px}.vw-mr30{margin-right:8vw}.mb30{margin-bottom:30px}.vw-mb30{margin-bottom:8vw}.ml30{margin-left:30px}.vw-ml30{margin-left:8vw}.mtb30{margin-top:30px;margin-bottom:30px}.vw-mtb30{margin-top:8vw;margin-bottom:8vw}.mtr30{margin-top:30px;margin-right:30px}.vw-mtr30{margin-top:8vw;margin-right:8vw}.mlt30{margin-left:30px;margin-top:30px}.vw-mlt30{margin-left:8vw;margin-top:8vw}.mlr30{margin-left:30px;margin-right:30px}.vw-mlr30{margin-left:8vw;margin-right:8vw}.mlb30{margin-left:30px;margin-bottom:30px}.vw-mlb30{margin-left:8vw;margin-bottom:8vw}.m40{margin:40px}.vw-m40{margin:10.67vw}.mt40{margin-top:40px}.vw-mt40{margin-top:10.67vw}.mr40{margin-right:40px}.vw-mr40{margin-right:10.67vw}.mb40{margin-bottom:40px}.vw-mb40{margin-bottom:10.67vw}.ml40{margin-left:40px}.vw-ml40{margin-left:10.67vw}.mtb40{margin-top:40px;margin-bottom:40px}.vw-mtb40{margin-top:10.67vw;margin-bottom:10.67vw}.mtr40{margin-top:40px;margin-right:40px}.vw-mtr40{margin-top:10.67vw;margin-right:10.67vw}.mlt40{margin-left:40px;margin-top:40px}.vw-mlt40{margin-left:10.67vw;margin-top:10.67vw}.mlr40{margin-left:40px;margin-right:40px}.vw-mlr40{margin-left:10.67vw;margin-right:10.67vw}.mlb40{margin-left:40px;margin-bottom:40px}.vw-mlb40{margin-left:10.67vw;margin-bottom:10.67vw}.m45{margin:45px}.vw-m45{margin:12vw}.mt45{margin-top:45px}.vw-mt45{margin-top:12vw}.mr45{margin-right:45px}.vw-mr45{margin-right:12vw}.mb45{margin-bottom:45px}.vw-mb45{margin-bottom:12vw}.ml45{margin-left:45px}.vw-ml45{margin-left:12vw}.mtb45{margin-top:45px;margin-bottom:45px}.vw-mtb45{margin-top:12vw;margin-bottom:12vw}.mtr45{margin-top:45px;margin-right:45px}.vw-mtr45{margin-top:12vw;margin-right:12vw}.mlt45{margin-left:45px;margin-top:45px}.vw-mlt45{margin-left:12vw;margin-top:12vw}.mlr45{margin-left:45px;margin-right:45px}.vw-mlr45{margin-left:12vw;margin-right:12vw}.mlb45{margin-left:45px;margin-bottom:45px}.vw-mlb45{margin-left:12vw;margin-bottom:12vw}.m50{margin:50px}.vw-m50{margin:13.33vw}.mt50{margin-top:50px}.vw-mt50{margin-top:13.33vw}.mr50{margin-right:50px}.vw-mr50{margin-right:13.33vw}.mb50{margin-bottom:50px}.vw-mb50{margin-bottom:13.33vw}.ml50{margin-left:50px}.vw-ml50{margin-left:13.33vw}.mtb50{margin-top:50px;margin-bottom:50px}.vw-mtb50{margin-top:13.33vw;margin-bottom:13.33vw}.mtr50{margin-top:50px;margin-right:50px}.vw-mtr50{margin-top:13.33vw;margin-right:13.33vw}.mlt50{margin-left:50px;margin-top:50px}.vw-mlt50{margin-left:13.33vw;margin-top:13.33vw}.mlr50{margin-left:50px;margin-right:50px}.vw-mlr50{margin-left:13.33vw;margin-right:13.33vw}.mlb50{margin-left:50px;margin-bottom:50px}.vw-mlb50{margin-left:13.33vw;margin-bottom:13.33vw}.m55{margin:55px}.vw-m55{margin:14.67vw}.mt55{margin-top:55px}.vw-mt55{margin-top:14.67vw}.mr55{margin-right:55px}.vw-mr55{margin-right:14.67vw}.mb55{margin-bottom:55px}.vw-mb55{margin-bottom:14.67vw}.ml55{margin-left:55px}.vw-ml55{margin-left:14.67vw}.mtb55{margin-top:55px;margin-bottom:55px}.vw-mtb55{margin-top:14.67vw;margin-bottom:14.67vw}.mtr55{margin-top:55px;margin-right:55px}.vw-mtr55{margin-top:14.67vw;margin-right:14.67vw}.mlt55{margin-left:55px;margin-top:55px}.vw-mlt55{margin-left:14.67vw;margin-top:14.67vw}.mlr55{margin-left:55px;margin-right:55px}.vw-mlr55{margin-left:14.67vw;margin-right:14.67vw}.mlb55{margin-left:55px;margin-bottom:55px}.vw-mlb55{margin-left:14.67vw;margin-bottom:14.67vw}.m60{margin:60px}.vw-m60{margin:16vw}.mt60{margin-top:60px}.vw-mt60{margin-top:16vw}.mr60{margin-right:60px}.vw-mr60{margin-right:16vw}.mb60{margin-bottom:60px}.vw-mb60{margin-bottom:16vw}.ml60{margin-left:60px}.vw-ml60{margin-left:16vw}.mtb60{margin-top:60px;margin-bottom:60px}.vw-mtb60{margin-top:16vw;margin-bottom:16vw}.mtr60{margin-top:60px;margin-right:60px}.vw-mtr60{margin-top:16vw;margin-right:16vw}.mlt60{margin-left:60px;margin-top:60px}.vw-mlt60{margin-left:16vw;margin-top:16vw}.mlr60{margin-left:60px;margin-right:60px}.vw-mlr60{margin-left:16vw;margin-right:16vw}.mlb60{margin-left:60px;margin-bottom:60px}.vw-mlb60{margin-left:16vw;margin-bottom:16vw}.p5{padding:5px}.vw-p5{padding:1.33vw}.pt5{padding-top:5px}.vw-pt5{padding-top:1.33vw}.pr5{padding-right:5px}.vw-pr5{padding-right:1.33vw}.pb5{padding-bottom:5px}.vw-pb5{padding-bottom:1.33vw}.pl5{padding-left:5px}.vw-pl5{padding-left:1.33vw}.ptb5{padding-top:5px;padding-bottom:5px}.vw-ptb5{padding-top:1.33vw;padding-bottom:1.33vw}.ptr5{padding-top:5px;padding-right:5px}.vw-ptr5{padding-top:1.33vw;padding-right:1.33vw}.plt5{padding-left:5px;padding-top:5px}.vw-plt5{padding-left:1.33vw;padding-top:1.33vw}.plr5{padding-left:5px;padding-right:5px}.vw-plr5{padding-left:1.33vw;padding-right:1.33vw}.plb5{padding-left:5px;padding-bottom:5px}.vw-plb5{padding-left:1.33vw;padding-bottom:1.33vw}.p10{padding:10px}.vw-p10{padding:2.67vw}.pt10{padding-top:10px}.vw-pt10{padding-top:2.67vw}.pr10{padding-right:10px}.vw-pr10{padding-right:2.67vw}.pb10{padding-bottom:10px}.vw-pb10{padding-bottom:2.67vw}.pl10{padding-left:10px}.vw-pl10{padding-left:2.67vw}.ptb10{padding-top:10px;padding-bottom:10px}.vw-ptb10{padding-top:2.67vw;padding-bottom:2.67vw}.ptr10{padding-top:10px;padding-right:10px}.vw-ptr10{padding-top:2.67vw;padding-right:2.67vw}.plt10{padding-left:10px;padding-top:10px}.vw-plt10{padding-left:2.67vw;padding-top:2.67vw}.plr10{padding-left:10px;padding-right:10px}.vw-plr10{padding-left:2.67vw;padding-right:2.67vw}.plb10{padding-left:10px;padding-bottom:10px}.vw-plb10{padding-left:2.67vw;padding-bottom:2.67vw}.p15{padding:15px}.vw-p15{padding:4vw}.pt15{padding-top:15px}.vw-pt15{padding-top:4vw}.pr15{padding-right:15px}.vw-pr15{padding-right:4vw}.pb15{padding-bottom:15px}.vw-pb15{padding-bottom:4vw}.pl15{padding-left:15px}.vw-pl15{padding-left:4vw}.ptb15{padding-top:15px;padding-bottom:15px}.vw-ptb15{padding-top:4vw;padding-bottom:4vw}.ptr15{padding-top:15px;padding-right:15px}.vw-ptr15{padding-top:4vw;padding-right:4vw}.plt15{padding-left:15px;padding-top:15px}.vw-plt15{padding-left:4vw;padding-top:4vw}.plr15{padding-left:15px;padding-right:15px}.vw-plr15{padding-left:4vw;padding-right:4vw}.plb15{padding-left:15px;padding-bottom:15px}.vw-plb15{padding-left:4vw;padding-bottom:4vw}.p20{padding:20px}.vw-p20{padding:5.33vw}.pt20{padding-top:20px}.vw-pt20{padding-top:5.33vw}.pr20{padding-right:20px}.vw-pr20{padding-right:5.33vw}.pb20{padding-bottom:20px}.vw-pb20{padding-bottom:5.33vw}.pl20{padding-left:20px}.vw-pl20{padding-left:5.33vw}.ptb20{padding-top:20px;padding-bottom:20px}.vw-ptb20{padding-top:5.33vw;padding-bottom:5.33vw}.ptr20{padding-top:20px;padding-right:20px}.vw-ptr20{padding-top:5.33vw;padding-right:5.33vw}.plt20{padding-left:20px;padding-top:20px}.vw-plt20{padding-left:5.33vw;padding-top:5.33vw}.plr20{padding-left:20px;padding-right:20px}.vw-plr20{padding-left:5.33vw;padding-right:5.33vw}.plb20{padding-left:20px;padding-bottom:20px}.vw-plb20{padding-left:5.33vw;padding-bottom:5.33vw}.p30{padding:30px}.vw-p30{padding:8vw}.pt30{padding-top:30px}.vw-pt30{padding-top:8vw}.pr30{padding-right:30px}.vw-pr30{padding-right:8vw}.pb30{padding-bottom:30px}.vw-pb30{padding-bottom:8vw}.pl30{padding-left:30px}.vw-pl30{padding-left:8vw}.ptb30{padding-top:30px;padding-bottom:30px}.vw-ptb30{padding-top:8vw;padding-bottom:8vw}.ptr30{padding-top:30px;padding-right:30px}.vw-ptr30{padding-top:8vw;padding-right:8vw}.plt30{padding-left:30px;padding-top:30px}.vw-plt30{padding-left:8vw;padding-top:8vw}.plr30{padding-left:30px;padding-right:30px}.vw-plr30{padding-left:8vw;padding-right:8vw}.plb30{padding-left:30px;padding-bottom:30px}.vw-plb30{padding-left:8vw;padding-bottom:8vw}.p40{padding:40px}.vw-p40{padding:10.67vw}.pt40{padding-top:40px}.vw-pt40{padding-top:10.67vw}.pr40{padding-right:40px}.vw-pr40{padding-right:10.67vw}.pb40{padding-bottom:40px}.vw-pb40{padding-bottom:10.67vw}.pl40{padding-left:40px}.vw-pl40{padding-left:10.67vw}.ptb40{padding-top:40px;padding-bottom:40px}.vw-ptb40{padding-top:10.67vw;padding-bottom:10.67vw}.ptr40{padding-top:40px;padding-right:40px}.vw-ptr40{padding-top:10.67vw;padding-right:10.67vw}.plt40{padding-left:40px;padding-top:40px}.vw-plt40{padding-left:10.67vw;padding-top:10.67vw}.plr40{padding-left:40px;padding-right:40px}.vw-plr40{padding-left:10.67vw;padding-right:10.67vw}.plb40{padding-left:40px;padding-bottom:40px}.vw-plb40{padding-left:10.67vw;padding-bottom:10.67vw}.p45{padding:45px}.vw-p45{padding:12vw}.pt45{padding-top:45px}.vw-pt45{padding-top:12vw}.pr45{padding-right:45px}.vw-pr45{padding-right:12vw}.pb45{padding-bottom:45px}.vw-pb45{padding-bottom:12vw}.pl45{padding-left:45px}.vw-pl45{padding-left:12vw}.ptb45{padding-top:45px;padding-bottom:45px}.vw-ptb45{padding-top:12vw;padding-bottom:12vw}.ptr45{padding-top:45px;padding-right:45px}.vw-ptr45{padding-top:12vw;padding-right:12vw}.plt45{padding-left:45px;padding-top:45px}.vw-plt45{padding-left:12vw;padding-top:12vw}.plr45{padding-left:45px;padding-right:45px}.vw-plr45{padding-left:12vw;padding-right:12vw}.plb45{padding-left:45px;padding-bottom:45px}.vw-plb45{padding-left:12vw;padding-bottom:12vw}.p50{padding:50px}.vw-p50{padding:13.33vw}.pt50{padding-top:50px}.vw-pt50{padding-top:13.33vw}.pr50{padding-right:50px}.vw-pr50{padding-right:13.33vw}.pb50{padding-bottom:50px}.vw-pb50{padding-bottom:13.33vw}.pl50{padding-left:50px}.vw-pl50{padding-left:13.33vw}.ptb50{padding-top:50px;padding-bottom:50px}.vw-ptb50{padding-top:13.33vw;padding-bottom:13.33vw}.ptr50{padding-top:50px;padding-right:50px}.vw-ptr50{padding-top:13.33vw;padding-right:13.33vw}.plt50{padding-left:50px;padding-top:50px}.vw-plt50{padding-left:13.33vw;padding-top:13.33vw}.plr50{padding-left:50px;padding-right:50px}.vw-plr50{padding-left:13.33vw;padding-right:13.33vw}.plb50{padding-left:50px;padding-bottom:50px}.vw-plb50{padding-left:13.33vw;padding-bottom:13.33vw}.p55{padding:55px}.vw-p55{padding:14.67vw}.pt55{padding-top:55px}.vw-pt55{padding-top:14.67vw}.pr55{padding-right:55px}.vw-pr55{padding-right:14.67vw}.pb55{padding-bottom:55px}.vw-pb55{padding-bottom:14.67vw}.pl55{padding-left:55px}.vw-pl55{padding-left:14.67vw}.ptb55{padding-top:55px;padding-bottom:55px}.vw-ptb55{padding-top:14.67vw;padding-bottom:14.67vw}.ptr55{padding-top:55px;padding-right:55px}.vw-ptr55{padding-top:14.67vw;padding-right:14.67vw}.plt55{padding-left:55px;padding-top:55px}.vw-plt55{padding-left:14.67vw;padding-top:14.67vw}.plr55{padding-left:55px;padding-right:55px}.vw-plr55{padding-left:14.67vw;padding-right:14.67vw}.plb55{padding-left:55px;padding-bottom:55px}.vw-plb55{padding-left:14.67vw;padding-bottom:14.67vw}.p60{padding:60px}.vw-p60{padding:16vw}.pt60{padding-top:60px}.vw-pt60{padding-top:16vw}.pr60{padding-right:60px}.vw-pr60{padding-right:16vw}.pb60{padding-bottom:60px}.vw-pb60{padding-bottom:16vw}.pl60{padding-left:60px}.vw-pl60{padding-left:16vw}.ptb60{padding-top:60px;padding-bottom:60px}.vw-ptb60{padding-top:16vw;padding-bottom:16vw}.ptr60{padding-top:60px;padding-right:60px}.vw-ptr60{padding-top:16vw;padding-right:16vw}.plt60{padding-left:60px;padding-top:60px}.vw-plt60{padding-left:16vw;padding-top:16vw}.plr60{padding-left:60px;padding-right:60px}.vw-plr60{padding-left:16vw;padding-right:16vw}.plb60{padding-left:60px;padding-bottom:60px}.vw-plb60{padding-left:16vw;padding-bottom:16vw}.w30{width:30px}.w40{width:40px}.w50{width:50px}.w60{width:60px}.w70{width:70px}.w80{width:80px}.w90{width:90px}.w100{width:100px}.w200{width:200px}.h30{height:30px}.h35{height:35px}.h40{height:40px}.h45{height:45px}.h50{height:50px}.h55{height:55px}.h60{height:60px}.h65{height:65px}.h70{height:70px}.h80{height:80px}.h90{height:90px}.h100{height:100px}.f10{font-size:10px}.vw-f10{font-size:2.67vw}.f12{font-size:12px}.vw-f12{font-size:3.2vw}.f13{font-size:13px}.vw-f13{font-size:3.47vw}.f14{font-size:14px}.vw-f14{font-size:3.73vw}.f15{font-size:15px}.vw-f15{font-size:4vw}.f16{font-size:16px}.vw-f16{font-size:4.27vw}.f17{font-size:17px}.vw-f17{font-size:4.53vw}.f18{font-size:18px}.vw-f18{font-size:4.8vw}.f20{font-size:20px}.vw-f20{font-size:5.33vw}.f24{font-size:24px}.vw-f24{font-size:6.4vw}.f28{font-size:28px}.vw-f28{font-size:7.47vw}.f32{font-size:32px}.vw-f32{font-size:8.53vw}.f40{font-size:40px}.vw-f40{font-size:10.67vw}.t0{top:0}.r0{right:0}.b0{bottom:0}.l0{left:0}.tb0{top:0;bottom:0}.tr0{top:0;right:0}.lt0{left:0;top:0}.lr0{left:0;right:0}.lb0{left:0;bottom:0}.t10{top:10px}.vw-t10{top:2.67vw}.r10{right:10px}.vw-r10{right:2.67vw}.b10{bottom:10px}.vw-b10{bottom:2.67vw}.l10{left:10px}.vw-l10{left:2.67vw}.tb10{top:10px;bottom:10px}.vw-tb10{top:2.67vw;bottom:2.67vw}.tr10{top:10px;right:10px}.vw-tr10{top:2.67vw;right:2.67vw}.lt10{left:10px;top:10px}.vw-lt10{left:2.67vw;top:2.67vw}.lr10{left:10px;right:10px}.vw-lr10{left:2.67vw;right:2.67vw}.lb10{left:10px;bottom:10px}.vw-lb10{left:2.67vw;bottom:2.67vw}.t20{top:20px}.vw-t20{top:5.33vw}.r20{right:20px}.vw-r20{right:5.33vw}.b20{bottom:20px}.vw-b20{bottom:5.33vw}.l20{left:20px}.vw-l20{left:5.33vw}.tb20{top:20px;bottom:20px}.vw-tb20{top:5.33vw;bottom:5.33vw}.tr20{top:20px;right:20px}.vw-tr20{top:5.33vw;right:5.33vw}.lt20{left:20px;top:20px}.vw-lt20{left:5.33vw;top:5.33vw}.lr20{left:20px;right:20px}.vw-lr20{left:5.33vw;right:5.33vw}.lb20{left:20px;bottom:20px}.vw-lb20{left:5.33vw;bottom:5.33vw}.t30{top:30px}.vw-t30{top:8vw}.r30{right:30px}.vw-r30{right:8vw}.b30{bottom:30px}.vw-b30{bottom:8vw}.l30{left:30px}.vw-l30{left:8vw}.tb30{top:30px;bottom:30px}.vw-tb30{top:8vw;bottom:8vw}.tr30{top:30px;right:30px}.vw-tr30{top:8vw;right:8vw}.lt30{left:30px;top:30px}.vw-lt30{left:8vw;top:8vw}.lr30{left:30px;right:30px}.vw-lr30{left:8vw;right:8vw}.lb30{left:30px;bottom:30px}.vw-lb30{left:8vw;bottom:8vw}.t40{top:40px}.vw-t40{top:10.67vw}.r40{right:40px}.vw-r40{right:10.67vw}.b40{bottom:40px}.vw-b40{bottom:10.67vw}.l40{left:40px}.vw-l40{left:10.67vw}.tb40{top:40px;bottom:40px}.vw-tb40{top:10.67vw;bottom:10.67vw}.tr40{top:40px;right:40px}.vw-tr40{top:10.67vw;right:10.67vw}.lt40{left:40px;top:40px}.vw-lt40{left:10.67vw;top:10.67vw}.lr40{left:40px;right:40px}.vw-lr40{left:10.67vw;right:10.67vw}.lb40{left:40px;bottom:40px}.vw-lb40{left:10.67vw;bottom:10.67vw}.t50{top:50px}.vw-t50{top:13.33vw}.r50{right:50px}.vw-r50{right:13.33vw}.b50{bottom:50px}.vw-b50{bottom:13.33vw}.l50{left:50px}.vw-l50{left:13.33vw}.tb50{top:50px;bottom:50px}.vw-tb50{top:13.33vw;bottom:13.33vw}.tr50{top:50px;right:50px}.vw-tr50{top:13.33vw;right:13.33vw}.lt50{left:50px;top:50px}.vw-lt50{left:13.33vw;top:13.33vw}.lr50{left:50px;right:50px}.vw-lr50{left:13.33vw;right:13.33vw}.lb50{left:50px;bottom:50px}.vw-lb50{left:13.33vw;bottom:13.33vw}.z1{z-index:1}.z2{z-index:2}.z3{z-index:3}.z4{z-index:4}.z5{z-index:5}.z6{z-index:6}.z7{z-index:7}.z8{z-index:8}.z9{z-index:9}.z1000{z-index:1000}.z1001{z-index:1001}.z1002{z-index:1002}.z1003{z-index:1003}.z9999{z-index:9999}.z10000{z-index:10000}.br1{border-radius:1px}.br2{border-radius:2px}.br3{border-radius:3px}.br4{border-radius:4px}.br5{border-radius:5px}.br6{border-radius:6px}.br7{border-radius:7px}.br8{border-radius:8px}.br10{border-radius:10px}.br15{border-radius:15px}.br20{border-radius:20px}.width-20{width:20%}.width-25{width:25%}.width-33{width:33.33333%}.width-50{width:50%}.width-100{width:100%}.height-50{height:50%}.height-100{height:100%}.max-width-50{max-width:50%}.max-width-100{max-width:100%}.min-height-50{min-height:50%}.min-height-100{min-height:100%}.th1,.th2{overflow:hidden}.th2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.tl{text-align:left}.tc{text-align:center}.tr{text-align:right}.td2{text-indent:2em}.i{font-style:italic}.b{font-weight:bold}.underline{text-decoration:underline}.strike{text-decoration:line-through}.ellipsis,.th1,.th2{text-overflow:ellipsis}.break{word-break:break-all}.nowrap,.th1{white-space:nowrap}.cp{cursor:pointer}.cm{cursor:move}.font-normalize{font-family:PingFang SC,Helvetica Neue,Arial,sans-serif}</style><script charset="utf-8" src="/js/project~share-out.js"></script><script charset="utf-8" src="/js/share-out.js"></script><style type="text/css">.share-article {
+								min-height: 100vh;
+							}
+							.share-article .share-tree {
+								position: fixed;
+								top: 122px;
+								bottom: 120px;
+								width: 250px;
+								background: #fff;
+								margin-right: 2px;
+								left: calc((100vw - 700px) / 2 - 250px - 10px);
+							}
+							.share-article .share-content {
+								width: 700px;
+							}
+							.share-article .share-toc {
+								border: 1px solid red;
+							}
+							.share-article .markdown-toc {
+								width: 250px;
+								position: fixed;
+								right: calc((100vw - 700px) / 2 - 250px - 10px);
+								top: 120px;
+								bottom: 120px;
+								overflow: auto;
+								font-size: 12px;
+							}
+							.share-article .markdown-toc:before {
+								content: '文章目录';
+								padding-left: 15px;
+							}
+							.share-article .markdown-toc .markdown-toc-list {
+								padding: 10px 15px 15px 15px!important;
+								background: #f7f8f9;
+								border-left: 2px #eee solid;
+							}
+							.share-article .markdown-toc a {
+								display: block;
+								white-space: nowrap;
+								overflow: hidden;
+								text-overflow: ellipsis;
+								color: #999;
+							}
+							.share-article .markdown-toc a:hover {
+								color: #3b8ff6;
+							}
+							.share-article .markdown-toc ul,
+							.share-article .markdown-toc ol {
+								list-style: none;
+								padding-left: 1em;
+							}
+							</style></head>
+							<body class="bg-f7">
+							<noscript>
+								<strong>We're sorry but doc-fe doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+							</noscript>
+							<div id="app"><div class="share-article"><div class="flex-center"><div class="share-content"><div class="plr15"><div id="content" class="markdown-body editormd-html-preview"></div></div></div></div></div><!----></div>
+							<script src="/vue.js"></script>
+							<script src="/jquery.min.js"></script>
+							<script src="/ant/index.js"></script>
+							<script src="/lib/raphael.min.js"></script>
+							<script src="/lib/marked.min.js"></script>
+							<script src="/lib/prettify.min.js"></script>
+							<script src="/lib/flowchart.min.js"></script>
+							<script src="/lib/jquery.flowchart.min.js"></script>
+							<script src="/lib/editormd.min.js"></script>
+							<script type="text/javascript" src="/js/chunk-vendors.js"></script><script type="text/javascript" src="/js/app.js"></script>
+
+							</body></html>
+								<a class="toc-level-2" href="#一 引子" level="2">一 引子</a></li>
+							<li>
+								<a class="toc-level-2" href="#二 正文" level="2">二 正文</a>
+								<ul>
+									<li>
+										<a class="toc-level-3" href="#2.1 关于 String" level="3">2.1 关于 String</a></li>
+									<li>
+										<a class="toc-level-3" href="#2.2 关于字面量" level="3">2.2 关于字面量</a></li>
+									<li>
+										<a class="toc-level-3" href="#2.3 与 String 相关的知识点" level="3">2.3 与 String 相关的知识点</a>
+										<ul>
+											<li>
+												<a class="toc-level-4" href="#2.3.1 binary string" level="4">2.3.1 binary string</a></li>
+											<li>
+												<a class="toc-level-4" href="#2.3.2 base64" level="4">2.3.2 base64</a></li>
+											<li>
+												<a class="toc-level-4" href="#2.3.3 DataURLs" level="4">2.3.3 DataURLs</a></li>
+											<li>
+												<a class="toc-level-4" href="#2.3.4 encodeURIComponent" level="4">2.3.4 encodeURIComponent</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a class="toc-level-2" href="#三 总结" level="2">三 总结</a>
+								<ul></ul>
+							</li>
+						</ul>
+					</div>
+					<h2 id="h2--">
+						<a name="一 引子" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>一 引子</h2>
+					<p>对于该知识点的探讨初衷源自对
+						<code>DOMString</code>的了解。</p>
+					<p>对于 DOMString，很多同学可能也没有真正的想过与它相关的定义：</p>
+					<ul>
+						<li>为什么是 DOMString 而不是 String？</li>
+						<li>与 String 有什么不同吗？</li></ul>
+					<p>这些知识点可能在实际的业务中并不会碰到，但是了解它可以使我们更深刻的理解这门语言。
+						<br>就像知道 “JavaScript的命名由来” 一样，或者说，就如 JavaScript 中的 null 和 undefined 的渊源一般。</p>
+					<p>基于以上，我所散发出来思考的内容是：</p>
+					<ul>
+						<li>JS 数据类型中的 String</li>
+						<li>与 String 相关的知识点</li></ul>
+					<h2 id="h2--">
+						<a name="二 正文" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>二 正文</h2>
+					<p>上面的第一个问题网上搜索一番就会得到答案，因为基础性的知识也比较简单。下面一一解答：</p>
+					<ul>
+						<li>在早期，DOM标准刚出的时候，String 是标准的一部分。</li>
+						<li>等同于 String</li></ul>
+					<p>需要区分注意的是：我们在开发时文件的编码是
+						<code>utf8</code>，而在 js 运行过程中，字符串的编码是
+						<code>utf16</code>，也就是说在 js 中字符的编码是
+						<code>utf16</code>，因为 js 的字符集是 Unicode。</p>
+					<p>而 DOMString 也就是 String 是 DOM标准中对于
+						<code>utf16</code>编码字符的接口实现。</p>
+					<h3 id="h3-2-1-string">
+						<a name="2.1 关于 String" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>2.1 关于 String</h3>
+					<p>我有时候会有这样的疑问，创建字符串有很多方式，那这些方式的区别是什么？</p>
+					<ul>
+						<li>
+							<p>字面量的方式</p>
+							<pre class="prettyprint linenums prettyprinted" style="">
+                    <ol class="linenums">
+                      <li class="L0">
+                        <code class="lang-js">
+                          <span class="kwd">var</span>
+                          <span class="pln">str</span>
+                          <span class="pun">=</span>
+                          <span class="pln"></span>
+                          <span class="str">'ym'</span></code>
+                      </li>
+                      <li class="L1">
+                        <code class="lang-js">
+                          <span class="com">// 得到的是字符串值</span></code>
+                      </li>
+                    </ol>
+                  </pre>
+						</li>
+						<li>
+							<p>构造函数</p>
+							<pre class="prettyprint linenums prettyprinted" style="">
+                    <ol class="linenums">
+                      <li class="L0">
+                        <code class="lang-js">
+                          <span class="typ">String</span>
+                          <span class="pun">(</span>
+                          <span class="lit">1</span>
+                          <span class="pun">)</span></code>
+                      </li>
+                      <li class="L1">
+                        <code class="lang-js">
+                          <span class="com">// 得到的是字符串值</span></code>
+                      </li>
+                    </ol>
+                  </pre>
+						</li>
+						<li>
+							<p>类实例化</p>
+							<pre class="prettyprint linenums prettyprinted" style="">
+                    <ol class="linenums">
+                      <li class="L0">
+                        <code class="lang-js">
+                          <span class="kwd">new</span>
+                          <span class="pln"></span>
+                          <span class="typ">String</span>
+                          <span class="pun">(</span>
+                          <span class="lit">123</span>
+                          <span class="pun">)</span></code>
+                      </li>
+                      <li class="L1">
+                        <code class="lang-js">
+                          <span class="com">// 得到的是字符串实例化对象</span></code>
+                      </li>
+                    </ol>
+                  </pre>
+						</li>
+					</ul>
+					<p>在 js 中，存在
+						<strong>基本字符串</strong>和
+						<strong>字符串对象</strong>，同理，布尔类型和数字类型也同样存在。</p>
+					<p>字符串字面量 和 直接调用 String 方法的字符串都是基本字符串。</p>
+					<p>JavaScript会自动将基本字符串转换为字符串对象，只有将基本字符串转化为字符串对象之后才可以使用字符串对象的方法。</p>
+					<p>当基本字符串需要调用一个字符串对象才有的方法或者查询值的时候(基本字符串是没有这些方法的)，JavaScript 会自动将基本字符串转化为字符串对象并且调用相应的方法或者执行查询。</p>
+					<h3 id="h3-2-2-">
+						<a name="2.2 关于字面量" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>2.2 关于字面量</h3>
+					<p>如果你没有认真思考过为什么会叫“字面量”的话，你应该对 js 的基础还缺乏系统性的认识。</p>
+					<p>我们会看到很多字面量表示法：</p>
+					<ul>
+						<li>字符串字面量</li>
+						<li>布尔类型字面量</li>
+						<li>数字类型字面量</li>
+						<li>数组字面量</li>
+						<li>对象字面量</li>
+						<li>正则表达式字面量</li></ul>
+					<p>字面量的英文表示：
+						<code>literal</code>，直接翻译过来：“字面意义的、完全按照原文的”，是个
+						<code>adj</code>形容词。</p>
+					<p>那也就是说：“你写出来的就是最终的值”，譬如</p>
+					<pre class="prettyprint linenums prettyprinted" style="">
+                <ol class="linenums">
+                  <li class="L0">
+                    <code class="lang-js">
+                      <span class="str">'ym'</span>
+                      <span class="pln"></span>
+                      <span class="com">// 就是表示一个字符串</span></code>
+                  </li>
+                  <li class="L1">
+                    <code class="lang-js">
+                      <span class="lit">123</span>
+                      <span class="pln"></span>
+                      <span class="com">// 就是表示一个整数</span></code>
+                  </li>
+                  <li class="L2">
+                    <code class="lang-js">
+                      <span class="kwd">true</span></code>
+                  </li>
+                  <li class="L3">
+                    <code class="lang-js">
+                      <span class="pun">[]</span></code>
+                  </li>
+                  <li class="L4">
+                    <code class="lang-js">
+                      <span class="pun">{}</span></code>
+                  </li>
+                  <li class="L5">
+                    <code class="lang-js">
+                      <span class="com">// 等等，都是字面量表示的数据类型</span></code>
+                  </li>
+                </ol>
+              </pre>
+					<p>网上搜到的很多关于它的解释是我觉得都是错误的。</p>
+					<h3 id="h3-2-3-string-">
+						<a name="2.3 与 String 相关的知识点" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>2.3 与 String 相关的知识点</h3>
+					<p>首先能想到的就是
+						<code>binary string</code>，其次是
+						<code>base64</code>。</p>
+					<h4 id="h4-2-3-1-binary-string">
+						<a name="2.3.1 binary string" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>2.3.1 binary string</h4>
+					<p>上文中我们提到 js 是使用的 unicode 字符集，我们都知道最开始使用的是 ascii 字符集，因为计算机普及字符肯定不够用才统一了字符集。</p>
+					<p>binary string 也是一种字符集，规范定义是代表 255 以内的字符（这里的255是指ascii编码的值），它的设计之初是用来代表 js 中的二进制数据。</p>
+					<p>我们知道 ascii 字符集是一个字节长度，想当然，binary string 需要 2 个字节才能表示。</p>
+					<h4 id="h4-2-3-2-base64">
+						<a name="2.3.2 base64" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>2.3.2 base64</h4>
+					<p>MDN 上的解释是</p>
+					<blockquote>
+						<p>是一组相似的二进制到文本（binary-to-text）的编码规则</p>
+					</blockquote>
+					<p>所谓文本其实是指 ascii 字符中的某些，base64 是由 64 个 ascii 字符组成：</p>
+					<ul>
+						<li>a-z</li>
+						<li>A-Z</li>
+						<li>0-9</li>
+						<li>+ 和 /</li></ul>
+					<p>所以 base64 应该就是指将 二进制 用这 64 个字符表示出来的一种编码规则。</p>
+					<p>utf16 中一个字节是 8 位，而在 base64 中一个字节是 6 位，所以用 base64 将二进制转化后的文本的大小是增大的。</p>
+					<p>在 window 对象中我们会常用到
+						<code>btoa()</code>和
+						<code>atob()</code>，其实就是 base64 的互相转化的方法。</p>
+					<p>便于记忆，方法其实对应
+						<code>binary to ascii</code>和
+						<code>ascii to binary</code>。</p>
+					<p>很显然，当输入的 utf16 字符码位超过了 ascii 字符集的范围，就应该会提示
+						<code>Range Error</code>了。</p>
+					<p>需要补充说明的是，由于 base64 的编码规则（长度）必然会导致在转化为 ascii 字符集的时候会有多余的字节位，多余的字节位会使用
+						<code>=</code>填充。</p>
+					<h4 id="h4-2-3-3-dataurls">
+						<a name="2.3.3 DataURLs" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>2.3.3 DataURLs</h4>
+					<p>我们接触到的最常用的场景是，本地预览图片，我们会使用 FileReader 对象，将本地图片转化为 DataURLs 来实现预览。</p>
+					<p>DataURLs 的构成:</p>
+					<pre class="prettyprint linenums prettyprinted" style="">
+                <ol class="linenums">
+                  <li class="L0">
+                    <code class="lang-js">
+                      <span class="pln">data</span>
+                      <span class="pun">:[&lt;</span>
+                      <span class="pln">mediatype</span>
+                      <span class="pun">&gt;][;</span>
+                      <span class="pln">base64</span>
+                      <span class="pun">],&lt;</span>
+                      <span class="pln">data</span>
+                      <span class="pun">&gt;</span></code>
+                  </li>
+                </ol>
+              </pre>
+					<p>我们可以反问一下：为什么 DataURLs 能够实现图片预览？</p>
+					<p>因为 base64 可以用来描述二进制啊，通过
+						<code>input</code>选择的 File 对象实际是二进制数据的封装。这样一想就对了。</p>
+					<blockquote>
+						<p>mediatype 就是 mimetype</p>
+					</blockquote>
+					<p>我们从 FileReader 对象中可以看到常见的几种数据格式：</p>
+					<ul>
+						<li>
+							<code>FileReader.readAsArrayBuffer()</code></li>
+						<li>
+							<code>FileReader.readAsBinaryString()</code></li>
+						<li>
+							<code>FileReader.readAsDataURL()</code></li>
+						<li>
+							<code>FileReader.readAsText()</code></li>
+					</ul>
+					<p>关于 ArrayBuffer 就不在本节的讲述范围了，与它跟相关的应该是：
+						<strong>js与二进制数据类型的交互”</strong>。</p>
+					<h4 id="h4-2-3-4-encodeuricomponent">
+						<a name="2.3.4 encodeURIComponent" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>2.3.4 encodeURIComponent</h4>
+					<p>仔细思考一下，它的作用是用来编码 URI，在 js 中，等同于编码 URL，那么名称上为什么会有
+						<code>Component</code>呢？</p>
+					<p>应该是指对 URL 的组成部分单独进行编码，那么是将什么编码转换成什么编码呢？</p>
+					<p>应该是根据当前 html 的 charset 来定，譬如我们都是使用的 utf8，所以 encodeURIComponent 是将不在 URI 规范中的字符编码成 utf8 直接序列来表示。</p>
+					<blockquote>
+						<p>注意：此处未深入了解，如有错误请指出。</p>
+					</blockquote>
+					<p>encodeURIComponent 常见的使用场景：</p>
+					<ul>
+						<li>url 跳转</li>
+						<li>xhr 请求参数</li></ul>
+					<p>区别在
+						<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent">mdn</a>上都有提到，可以了解一下。</p>
+					<h2 id="h2--">
+						<a name="三 总结" class="reference-link"></a>
+						<span class="header-link octicon octicon-link"></span>三 总结</h2>
+					<p>其实，与 String 相关的知识点大多与字符编码有关，不同的数据类型是为了给解决某些问题带来更好的处理办法。当然，这些知识点是零碎的，需要自己花时间系统性的了解一遍，如果说有那么一本书介绍了 js 的发展历程中各个特性或数据类型的由来，我觉得也是非常值得一看的。</p>
+					<p>基础还是非常重要的。</p>
+				</div>
+				<!---->
+				<div class="tc ptb20 c-999">
+					<p>@2020 讯盟文档</p>
+					<p>Design by 讯盟 FE</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!----></div>
+</body>
+
+</html>

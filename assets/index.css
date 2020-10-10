@@ -1,0 +1,9 @@
+p {
+	border: 1px solid red !important;
+}
+
+p img {
+	width: 100%;
+	height: auto;
+	border: 1px solid red !important;
+}

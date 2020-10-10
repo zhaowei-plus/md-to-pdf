@@ -33,7 +33,7 @@ const contentArray = [
 		launch_options,
 	})
 
-	await Mark.toHtml("# 测试标题", 'html/index.html')
+	await Mark.toHtml("# 测试标题", 'html/index.ejs')
 	await Mark.batchToHtml([
 		{
 			content: "# 测试标题",

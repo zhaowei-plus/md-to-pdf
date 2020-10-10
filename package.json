@@ -1,6 +1,6 @@
 {
   "name": "xm-md-pdf",
-  "version": "0.0.4",
+  "version": "0.1.2",
   "description": "CLI tool for converting Markdown files to PDF.",
   "keywords": [
     "markdown-to-pdf",
@@ -35,16 +35,19 @@
     "md-to-pdf": "dist/cli.js",
     "md2pdf": "dist/cli.js"
   },
-  "author": "Simon Haenisch (https://github.com/simonhaenisch)",
+  "author": "zhaowei (https://github.com/zhaowei-plus)",
   "license": "MIT",
-  "repository": "simonhaenisch/md-to-pdf",
-  "homepage": "https://github.com/simonhaenisch/md-to-pdf#readme",
+  "repository": "zhaowei-plus/xm-md-pdf",
+  "homepage": "https://github.com/zhaowei-plus/xm-md-pdf.git#readme",
   "dependencies": {
+    "@types/puppeteer-core": "^2.0.0",
     "arg": "4.1.3",
     "blob": "^0.1.0",
     "chalk": "4.1.0",
     "chokidar": "3.4.1",
+    "ejs": "^3.1.5",
     "file-saver": "^2.0.2",
+    "fs-extra": "^9.0.1",
     "get-port": "5.1.1",
     "get-stdin": "8.0.0",
     "gray-matter": "4.0.2",
@@ -54,7 +57,8 @@
     "listr": "0.14.3",
     "marked": "1.1.1",
     "officegen": "^0.6.4",
-    "puppeteer": "5.2.1",
+    "pdflatex": "^0.0.1",
+    "puppeteer-core": "^5.3.1",
     "semver": "7.3.2",
     "serve-handler": "6.1.3"
   },
